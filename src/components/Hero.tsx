@@ -145,12 +145,6 @@ export const Hero: React.FC<HeroProps> = ({
       {/* Hero Content Container */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-16 lg:py-24 text-center flex flex-col items-center">
         
-        {/* Top Gamer Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-amber-500/40 text-amber-400 text-xs font-semibold backdrop-blur-md shadow-lg shadow-amber-500/10 mb-6">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>{t.badge}</span>
-        </div>
-
         {/* Grand Game Headline */}
         <h1 className="font-cinzel text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6 leading-tight drop-shadow-md">
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">

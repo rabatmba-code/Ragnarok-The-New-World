@@ -3,6 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          var activeFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              return activeFetch;
+            },
+            set: function(newFetch) {
+              activeFetch = newFetch;
+            }
+          });
+        } catch (e) {}
+      })();
+    </script>
     <title>Ragnarok: The New World | Next-Gen Open World Anime MMORPG</title>
     <meta name="description" content="Experience the next-generation open world MMORPG. Live, explore, socialize, trade in Prontera, and embark on legendary adventures across Midgard." />
     <meta property="og:title" content="Ragnarok: The New World | Next-Gen Open World Anime MMORPG" />
