@@ -157,21 +157,30 @@ export const FooterAndSpecs: React.FC<FooterAndSpecsProps> = ({
 
       {/* Community Links & Copyright */}
       <div className="max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="font-cinzel text-base font-bold text-white tracking-wider">
-              RAGNAROK: THE NEW WORLD
-            </span>
-            <span className="text-[10px] bg-slate-800 text-amber-400 px-2 py-0.5 rounded font-mono">
-              STEAM HERO BANNER
-            </span>
+        <div className="flex items-start gap-3.5">
+          <div className="w-12 h-12 rounded-xl overflow-hidden p-0.5 bg-gradient-to-br from-amber-400 to-yellow-600 shadow-md shrink-0">
+            <img
+              src="/assets/ragnarok_logo.jpg"
+              alt="Ragnarok: The New World Emblem"
+              className="w-full h-full object-cover rounded-[10px]"
+            />
           </div>
+          <div>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="font-cinzel text-base font-bold text-white tracking-wider">
+                RAGNAROK: THE NEW WORLD
+              </span>
+              <span className="text-[10px] bg-slate-800 text-amber-400 px-2 py-0.5 rounded font-mono">
+                STEAM HERO BANNER
+              </span>
+            </div>
           <p className="max-w-md text-slate-400 text-[11px] leading-relaxed">
             © GRAVITY Co., Ltd. & Official Licensees. All rights reserved. This page is built for the global gaming community.
           </p>
           <p className="text-[11px] text-amber-300/80 mt-2 font-medium">
             {t.darijaFarewell}
           </p>
+          </div>
         </div>
 
         {/* Community Buttons */}

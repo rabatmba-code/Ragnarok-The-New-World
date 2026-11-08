@@ -113,23 +113,26 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Logo & Emblem */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <span className="font-cinzel text-xl font-bold text-amber-400">R</span>
-              </div>
+          <a href="#" className="flex items-center gap-3.5 group">
+            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden p-0.5 bg-gradient-to-br from-amber-300 via-amber-500 to-yellow-600 shadow-xl shadow-amber-500/25 group-hover:scale-105 group-hover:shadow-amber-400/40 transition-all duration-300 ring-2 ring-amber-400/40">
+              <img
+                src="/assets/ragnarok_logo.jpg"
+                alt="Ragnarok: The New World Official Crest"
+                className="w-full h-full object-cover rounded-[14px]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent pointer-events-none" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="font-cinzel text-lg md:text-xl font-black tracking-wider text-slate-100 group-hover:text-amber-400 transition-colors">
+                <span className="font-cinzel text-lg md:text-xl font-black tracking-wider text-white group-hover:text-amber-400 transition-colors drop-shadow">
                   RAGNAROK
                 </span>
-                <span className="bg-gradient-to-r from-amber-400 to-yellow-300 text-slate-950 text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-tighter">
-                  New World
+                <span className="bg-gradient-to-r from-amber-400 to-yellow-300 text-slate-950 text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-tighter shadow-sm">
+                  The New World
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 tracking-widest uppercase font-mono">
-                Across Time Into the World
+              <p className="text-[10px] text-amber-300/80 tracking-widest uppercase font-mono font-semibold">
+                Across Time Into Midgard
               </p>
             </div>
           </a>
