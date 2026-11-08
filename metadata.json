@@ -1,0 +1,6 @@
+{
+  "name": "Ragnarok: The New World",
+  "description": "Experience the next-generation open world MMORPG. Live, explore, socialize, trade in Prontera, and embark on legendary adventures across Midgard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

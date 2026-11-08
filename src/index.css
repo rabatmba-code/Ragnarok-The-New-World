@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-cinzel: 'Cinzel', serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  background-color: #080c14;
+  color: #f1f5f9;
+  overflow-x: hidden;
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel), serif;
+}
+
+/* Crisp image rendering to eliminate blur */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #090e17;
+}
+::-webkit-scrollbar-thumb {
+  background: #253347;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.04);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 5s ease-in-out infinite;
+}
