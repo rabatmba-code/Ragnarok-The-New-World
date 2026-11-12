@@ -8,6 +8,24 @@ interface ScreenshotGalleryProps {
 export const ScreenshotGallery: React.FC<ScreenshotGalleryProps> = ({ activeLanguage }) => {
   const screenshots = [
     {
+      id: 'campus_kitty_wonder',
+      src: '/assets/aistudio/image_2f98b010.png',
+      title: 'Campus Kitty: Wonder Tour Feline Outfit',
+      subtitle: 'Official Chibi Visual • Cat Ears, Sailor Uniforms & Midgard Kittens',
+      category: 'Customization',
+      description:
+        'Official Ragnarok: The New World chibi artwork celebrating the Campus Kitty Wonder Tour! Features adorable feline-eared adventurers in pastel sailor suits with companion kittens.',
+    },
+    {
+      id: 'siege_war_emperium',
+      src: '/assets/aistudio/image_d1a84294.png',
+      title: 'Imperial Siege War: War of Emperium (GvG)',
+      subtitle: 'Official Battle Art • Cross-Server Castle Clash & Emperium Siege',
+      category: 'Guild Life',
+      description:
+        'Fierce guild warfare visual showing Knights, Monks, Priests, and Hunters in the celestial and molten fury of cross-server castle conquest.',
+    },
+    {
       id: 'legend_cup_4k',
       src: '/assets/aistudio/image_81863f60.png',
       title: 'Legend Cup 2026: Fight To Be Legend (4K UHD)',

@@ -112,36 +112,39 @@ export const Navbar: React.FC<NavbarProps> = ({
       <nav className="sticky top-0 z-40 bg-[#090d18]/95 backdrop-blur-md border-b border-amber-500/20 px-4 lg:px-8 py-3.5 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
-          {/* Logo & Emblem */}
-          <a href="#" className="flex items-center gap-3.5 group">
-            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden p-0.5 bg-gradient-to-br from-amber-300 via-amber-500 to-yellow-600 shadow-xl shadow-amber-500/25 group-hover:scale-105 group-hover:shadow-amber-400/40 transition-all duration-300 ring-2 ring-amber-400/40">
+          {/* Logo & Emblem featuring the Official Chibi Game Logo */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="relative h-11 sm:h-12 w-auto flex items-center rounded-2xl overflow-hidden p-1 bg-gradient-to-r from-sky-500/30 via-pink-500/25 to-amber-500/30 border border-sky-400/50 shadow-lg shadow-sky-500/20 group-hover:scale-105 group-hover:border-pink-400/60 transition-all duration-300 ring-1 ring-sky-400/30">
               <img
-                src="/assets/ragnarok_logo.jpg"
-                alt="Ragnarok: The New World Official Crest"
-                className="w-full h-full object-cover rounded-[14px]"
+                src="/assets/official_chibi_logo.png"
+                alt="Ragnarok: The New World Chibi Official Logo"
+                className="h-9 sm:h-10 w-auto object-contain rounded-xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent pointer-events-none" />
             </div>
-            <div>
+            <div className="hidden sm:block">
               <div className="flex items-center gap-1.5">
-                <span className="font-cinzel text-lg md:text-xl font-black tracking-wider text-white group-hover:text-amber-400 transition-colors drop-shadow">
-                  RAGNAROK
+                <span className="font-cinzel text-base md:text-lg font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-blue-400 to-sky-100 group-hover:from-amber-300 group-hover:to-yellow-200 transition-all drop-shadow">
+                  RAGNARÖK
                 </span>
-                <span className="bg-gradient-to-r from-amber-400 to-yellow-300 text-slate-950 text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase tracking-tighter shadow-sm">
+                <span className="bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-tight shadow-sm shadow-pink-500/25">
                   The New World
                 </span>
               </div>
-              <p className="text-[10px] text-amber-300/80 tracking-widest uppercase font-mono font-semibold">
+              <p className="text-[10px] text-amber-300/90 tracking-widest uppercase font-mono font-bold">
                 Across Time Into Midgard
               </p>
             </div>
           </a>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
+          <div className="hidden lg:flex items-center gap-5 text-sm font-medium text-slate-300">
             <a href="#legend-cup" className="hover:text-amber-300 transition-colors flex items-center gap-1.5 text-amber-400 font-bold px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30">
               <Gift className="w-4 h-4 text-amber-400" />
               <span>{t.legendCup}</span>
+            </a>
+            <a href="#seasonal" className="hover:text-pink-300 transition-colors flex items-center gap-1.5 text-pink-300 font-bold px-2.5 py-1 rounded-lg bg-pink-500/10 border border-pink-500/30">
+              <Sparkles className="w-4 h-4 text-pink-400" />
+              <span>{activeLanguage === 'fil' ? 'Mga Event' : activeLanguage === 'ar' ? 'الفعاليات' : 'Events & Art'}</span>
             </a>
             <a href="#modes" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
               <Gamepad2 className="w-4 h-4 text-amber-400" />
@@ -233,6 +236,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Gift className="w-4 h-4 text-amber-400" />
               <span>{t.legendCup}</span>
+            </a>
+            <a
+              href="#seasonal"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2 text-sm text-pink-300 font-bold p-2 rounded-lg bg-pink-500/10 border border-pink-500/20"
+            >
+              <Sparkles className="w-4 h-4 text-pink-400" />
+              <span>{activeLanguage === 'fil' ? 'Mga Event' : activeLanguage === 'ar' ? 'الفعاليات' : 'Events & Art'}</span>
             </a>
             <a
               href="#modes"

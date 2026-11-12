@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trophy, Gift, Share2, Copy, Check, Sparkles, ExternalLink, ShieldCheck, Ticket, Users, Calendar, Flame, Eye } from 'lucide-react';
+import { Trophy, Gift, Share2, Copy, Check, Sparkles, ExternalLink, ShieldCheck, Ticket, Users, Calendar, Eye } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface LegendCupGiveawayProps {
@@ -237,35 +237,6 @@ export const LegendCupGiveaway: React.FC<LegendCupGiveawayProps> = ({
                 <span className="hidden sm:inline">{t.inspectPosterBtn}</span>
                 <span className="sm:hidden">4K View</span>
               </button>
-            </div>
-
-            {/* Bottom Overlay Info Banner */}
-            <div className="absolute bottom-4 inset-x-4 sm:bottom-6 sm:inset-x-6 p-4 sm:p-6 rounded-2xl bg-slate-950/90 border border-amber-500/40 backdrop-blur-md flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-red-600 flex items-center justify-center shadow-lg shadow-amber-500/30 shrink-0">
-                  <Flame className="w-6 h-6 text-slate-950 fill-current" />
-                </div>
-                <div>
-                  <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white">
-                    LEGEND CUP: FIGHT TO BE LEGEND
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-300">
-                    Two competitive formats • Global cross-server arena • Officially licensed by Gravity
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/?location=hero_banner"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-lg shadow-amber-400/20 transition-all flex items-center gap-2"
-                >
-                  <span>Wishlist & Tournament Hub</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
             </div>
 
           </div>

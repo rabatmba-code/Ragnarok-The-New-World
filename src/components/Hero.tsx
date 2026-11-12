@@ -16,6 +16,14 @@ export const Hero: React.FC<HeroProps> = ({
 
   const backdrops = [
     {
+      src: '/assets/aistudio/image_2f98b010.png',
+      label: '🐱 Campus Kitty Wonder Tour',
+    },
+    {
+      src: '/assets/aistudio/image_d1a84294.png',
+      label: '⚔️ Imperial Siege War',
+    },
+    {
       src: '/assets/aistudio/image_81863f60.png',
       label: '🏆 Legend Cup $1.01M (4K UHD)',
     },
@@ -143,11 +151,28 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-blue-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-16 lg:py-24 text-center flex flex-col items-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-14 lg:py-20 text-center flex flex-col items-center">
         
+        {/* Official Chibi Game Logo Crest */}
+        <div className="mb-6 flex flex-col items-center">
+          <div className="relative group p-1.5 sm:p-2 rounded-3xl bg-gradient-to-r from-sky-500/30 via-pink-500/25 to-amber-500/30 border-2 border-sky-400/50 shadow-2xl shadow-sky-500/25 backdrop-blur-md hover:scale-105 hover:border-pink-400/70 transition-all duration-300 ring-2 ring-sky-400/30">
+            <img
+              src="/assets/official_chibi_logo.png"
+              alt="Ragnarok: The New World Official Chibi Logo"
+              className="h-20 sm:h-24 md:h-28 w-auto object-contain rounded-2xl filter drop-shadow-[0_8px_20px_rgba(37,99,235,0.45)]"
+            />
+          </div>
+          <div className="mt-2 flex items-center gap-2 text-xs font-mono font-bold">
+            <span className="w-2 h-2 rounded-full bg-pink-400 animate-ping" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-pink-300 to-amber-300 tracking-wider">
+              OFFICIAL GRAVITY MMORPG
+            </span>
+          </div>
+        </div>
+
         {/* Grand Game Headline */}
         <h1 className="font-cinzel text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6 leading-tight drop-shadow-md">
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-blue-300 to-amber-300">
             {t.titleHighlight}
           </span>
           <span className="block text-white mt-1">

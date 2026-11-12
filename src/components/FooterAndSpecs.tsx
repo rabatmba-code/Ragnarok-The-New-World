@@ -157,21 +157,21 @@ export const FooterAndSpecs: React.FC<FooterAndSpecsProps> = ({
 
       {/* Community Links & Copyright */}
       <div className="max-w-6xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
-        <div className="flex items-start gap-3.5">
-          <div className="w-12 h-12 rounded-xl overflow-hidden p-0.5 bg-gradient-to-br from-amber-400 to-yellow-600 shadow-md shrink-0">
+        <div className="flex items-start gap-4">
+          <div className="h-12 w-auto rounded-xl overflow-hidden p-1 bg-gradient-to-r from-sky-500/30 via-pink-500/25 to-amber-500/30 border border-sky-400/50 shadow-md shrink-0 flex items-center">
             <img
-              src="/assets/ragnarok_logo.jpg"
-              alt="Ragnarok: The New World Emblem"
-              className="w-full h-full object-cover rounded-[10px]"
+              src="/assets/official_chibi_logo.png"
+              alt="Ragnarok: The New World Chibi Official Crest"
+              className="h-10 w-auto object-contain rounded-lg"
             />
           </div>
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="font-cinzel text-base font-bold text-white tracking-wider">
-                RAGNAROK: THE NEW WORLD
+              <span className="font-cinzel text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-blue-400 to-sky-200 tracking-wider">
+                RAGNARÖK: THE NEW WORLD
               </span>
-              <span className="text-[10px] bg-slate-800 text-amber-400 px-2 py-0.5 rounded font-mono">
-                STEAM HERO BANNER
+              <span className="text-[10px] bg-pink-500/20 text-pink-300 border border-pink-500/30 px-2 py-0.5 rounded-full font-mono font-bold">
+                OFFICIAL GRAVITY CHIBI MMORPG
               </span>
             </div>
           <p className="max-w-md text-slate-400 text-[11px] leading-relaxed">

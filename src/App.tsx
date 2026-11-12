@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { LegendCupGiveaway } from './components/LegendCupGiveaway';
+import { SeasonalSpotlight } from './components/SeasonalSpotlight';
 import { VideoTheater } from './components/VideoTheater';
 import { GameModes } from './components/GameModes';
 import { PronteraMarket } from './components/PronteraMarket';
@@ -26,7 +27,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950">
+    <div className="min-h-screen bg-[#070b16] text-slate-100 flex flex-col font-sans selection:bg-sky-500 selection:text-white">
       
       {/* Navigation */}
       <Navbar
@@ -48,6 +49,12 @@ export default function App() {
 
         {/* 🏆 Official Legend Cup Global Tournament ($1.01M) & 🎁 Share & Win a $10 Gift Card! */}
         <LegendCupGiveaway
+          activeLanguage={activeLanguage}
+          onInspectImage={(src, caption) => setInspectImage({ src, caption })}
+        />
+
+        {/* 🌟 Official Seasonal Highlights: Campus Kitty Wonder Tour & Imperial Siege War */}
+        <SeasonalSpotlight
           activeLanguage={activeLanguage}
           onInspectImage={(src, caption) => setInspectImage({ src, caption })}
         />

@@ -16,6 +16,11 @@ export const GameModes: React.FC<GameModesProps> = ({
 
   const fashionImages = [
     {
+      src: '/assets/aistudio/image_2f98b010.png',
+      label: 'Campus Kitty Wonder Tour',
+      caption: 'Official Chibi Art: Campus Kitty Wonder Tour Feline Outfit, cat ears, and companion kittens in Midgard.',
+    },
+    {
       src: '/assets/steam_hd/steam_ss_2.jpg',
       label: '1080p Wardrobe & Angel Wings',
       caption: 'Full HD 1080p in-game Wardrobe interface: Celestial angel wings, hairstyles, and outfits catalog.',
@@ -33,6 +38,11 @@ export const GameModes: React.FC<GameModesProps> = ({
   ];
 
   const socialImages = [
+    {
+      src: '/assets/aistudio/image_d1a84294.png',
+      label: 'Siege War Imperial Clash',
+      caption: 'Official Siege War (WoE): Epic cross-server battle between guilds clashing for imperial castle control.',
+    },
     {
       src: '/assets/steam_hd/steam_ss_8.jpg',
       label: '1080p Cathedral Holy Matrimony',
