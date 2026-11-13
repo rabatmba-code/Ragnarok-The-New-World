@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { LegendCupGiveaway } from './components/LegendCupGiveaway';
 import { SeasonalSpotlight } from './components/SeasonalSpotlight';
+import { SkyDescentMiniGame } from './components/SkyDescentMiniGame';
 import { VideoTheater } from './components/VideoTheater';
 import { GameModes } from './components/GameModes';
 import { PronteraMarket } from './components/PronteraMarket';
@@ -58,6 +59,9 @@ export default function App() {
           activeLanguage={activeLanguage}
           onInspectImage={(src, caption) => setInspectImage({ src, caption })}
         />
+
+        {/* 🪂 PC Hardcore Sky Descent Mini-Game: Midgard Sky Dive */}
+        <SkyDescentMiniGame />
 
         {/* Video Theater (Steam HLS Trailer + YouTube 4K) */}
         <VideoTheater activeLanguage={activeLanguage} />

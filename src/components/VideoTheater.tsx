@@ -13,6 +13,7 @@ export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) =>
   const [isMuted, setIsMuted] = useState(true);
   const [hlsReady, setHlsReady] = useState(false);
   const [miniPlayer, setMiniPlayer] = useState(false);
+  const userPausedRef = useRef(false);
 
   const steamHlsUrl =
     'https://video.akamai.steamstatic.com/store_trailers/4212480/247566644/93bac4cbb55c38157a6c4cb203ad9eb1768803c5/1775620731/hls_264_master.m3u8';
@@ -92,7 +93,7 @@ export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) =>
     if (!video) return;
 
     const checkInterval = setInterval(() => {
-      if (video.paused && activeTab === 'steam') {
+      if (video.paused && !userPausedRef.current && activeTab === 'steam') {
         video.muted = true;
         video.play().then(() => setIsPlaying(true)).catch(() => {});
       }
@@ -106,8 +107,10 @@ export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) =>
     if (!video) return;
 
     if (video.paused) {
+      userPausedRef.current = false;
       video.play().then(() => setIsPlaying(true)).catch(() => {});
     } else {
+      userPausedRef.current = true;
       video.pause();
       setIsPlaying(false);
     }
@@ -240,9 +243,10 @@ export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) =>
         </div>
 
         {/* Audio Unmute Callout Ribbon */}
-        <div
+        <button
+          type="button"
           onClick={toggleMute}
-          className={`max-w-5xl mx-auto mb-4 p-3 rounded-2xl flex items-center justify-between gap-4 cursor-pointer transition-all border shadow-lg ${
+          className={`w-full max-w-5xl mx-auto mb-4 p-3 rounded-2xl flex items-center justify-between gap-4 cursor-pointer transition-all border shadow-lg text-left ${
             isMuted
               ? 'bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 border-amber-400/40 text-amber-200 hover:border-amber-400'
               : 'bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-emerald-500/20 border-emerald-400/40 text-emerald-200 hover:border-emerald-400'
@@ -257,10 +261,10 @@ export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) =>
             </span>
           </div>
 
-          <span className="text-xs font-extrabold px-3 py-1 rounded-lg bg-slate-950/80 border border-white/20">
+          <span className="text-xs font-extrabold px-3 py-1 rounded-lg bg-slate-950/80 border border-white/20 shrink-0">
             {isMuted ? 'CLICK TO UNMUTE' : 'SOUND ON'}
           </span>
-        </div>
+        </button>
 
         {/* Main Video Screen Container */}
         <div className="relative rounded-3xl overflow-hidden border-2 border-slate-700/80 bg-slate-950 shadow-2xl shadow-blue-950/60 aspect-video max-w-5xl mx-auto group">
@@ -367,9 +371,7 @@ export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) =>
           </div>
 
           <a
-            href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/?location=hero_banner"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#go2offer#"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-blue-600/30 transition-all shrink-0"
           >
             <span>{t.steamStoreBtn}</span>

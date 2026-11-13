@@ -94,25 +94,22 @@ export const FooterAndSpecs: React.FC<FooterAndSpecsProps> = ({
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
-              href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/?location=hero_banner"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#go2offer#"
               className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-sm font-extrabold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-indigo-500 shadow-xl shadow-blue-500/30 transition-all transform hover:-translate-y-0.5"
             >
-              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 fill-current" viewBox="0 0 28 32">
                 <path d="M11.979 0C5.378 0 0 5.378 0 11.979c0 5.385 3.567 9.94 8.513 11.458l3.187-4.609a3.252 3.252 0 0 1-.223-.051 3.284 3.284 0 0 1-2.28-4.04l-3.95-1.632C4.37 13.987 4 15.228 4 16.54c0 3.792 2.628 6.98 6.182 7.82l2.368-3.424a3.298 3.298 0 0 1 1.705.474c1.82 1.05 2.445 3.38 1.396 5.2a3.308 3.308 0 0 1-5.198 1.396l-2.428 3.513C9.39 31.815 10.662 32 11.979 32 20.827 32 28 24.827 28 15.979S20.827 0 11.979 0z"/>
               </svg>
               <span>{t.wishlistBtn}</span>
               <ExternalLink className="w-4 h-4 opacity-80" />
             </a>
 
-            <button
-              type="button"
-              onClick={onOpenPreRegister}
+            <a
+              href="#go2offer#"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-sm font-extrabold text-slate-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-xl shadow-amber-400/20 transition-all transform hover:-translate-y-0.5 cursor-pointer"
             >
               <span>{t.preRegBtn}</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -186,20 +183,16 @@ export const FooterAndSpecs: React.FC<FooterAndSpecsProps> = ({
         {/* Community Buttons */}
         <div className="flex items-center gap-3">
           <a
-            href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/?location=hero_banner"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#go2offer#"
             className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-400 text-slate-300 hover:text-white transition-colors"
             title="Steam Store"
           >
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 28 32">
               <path d="M11.979 0C5.378 0 0 5.378 0 11.979c0 5.385 3.567 9.94 8.513 11.458l3.187-4.609a3.252 3.252 0 0 1-.223-.051 3.284 3.284 0 0 1-2.28-4.04l-3.95-1.632C4.37 13.987 4 15.228 4 16.54c0 3.792 2.628 6.98 6.182 7.82l2.368-3.424a3.298 3.298 0 0 1 1.705.474c1.82 1.05 2.445 3.38 1.396 5.2a3.308 3.308 0 0 1-5.198 1.396l-2.428 3.513C9.39 31.815 10.662 32 11.979 32 20.827 32 28 24.827 28 15.979S20.827 0 11.979 0z"/>
             </svg>
           </a>
           <a
-            href="https://www.youtube.com/watch?v=RUjnauha-aU"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#go2offer#"
             className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-red-400 text-slate-300 hover:text-red-400 transition-colors"
             title="YouTube Gameplay"
           >
@@ -208,9 +201,7 @@ export const FooterAndSpecs: React.FC<FooterAndSpecsProps> = ({
             </svg>
           </a>
           <a
-            href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#go2offer#"
             className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-400 text-amber-400 text-xs font-bold transition-colors"
           >
             Discord / Community

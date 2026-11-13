@@ -269,7 +269,7 @@ export const GameModes: React.FC<GameModesProps> = ({
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                       fashionSubImage === idx
                         ? 'bg-pink-500 text-white shadow-md shadow-pink-500/30'
-                        : 'bg-slate-800 text-slate-300 hover:bg-slate-750'
+                        : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                     }`}
                   >
                     {img.label}
@@ -288,7 +288,7 @@ export const GameModes: React.FC<GameModesProps> = ({
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                       socialSubImage === idx
                         ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30'
-                        : 'bg-slate-800 text-slate-300 hover:bg-slate-750'
+                        : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                     }`}
                   >
                     {img.label}

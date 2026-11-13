@@ -110,7 +110,7 @@ export const ClassSelector: React.FC<ClassSelectorProps> = ({ activeLanguage }) 
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 !quizMode
                   ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-400/20'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-750'
+                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
               }`}
             >
               {t.overviewTab}
@@ -121,7 +121,7 @@ export const ClassSelector: React.FC<ClassSelectorProps> = ({ activeLanguage }) 
               className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 quizMode
                   ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-750'
+                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5 text-purple-300" />
@@ -294,7 +294,7 @@ export const ClassSelector: React.FC<ClassSelectorProps> = ({ activeLanguage }) 
                       style={{ backgroundColor: cls.accentColor }}
                     />
                     <span>{cls.name}</span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-950 text-slate-400">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-950 text-slate-400">
                       {cls.role}
                     </span>
                   </button>

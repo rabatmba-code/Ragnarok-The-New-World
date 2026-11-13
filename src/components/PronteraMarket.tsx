@@ -21,8 +21,9 @@ export const PronteraMarket: React.FC<PronteraMarketProps> = ({ activeLanguage }
   const [price, setPrice] = useState('250000');
   const [category, setCategory] = useState<MarketItem['category']>('Weapon');
   const [notes, setNotes] = useState('');
+  const [whisperNotice, setWhisperNotice] = useState<string | null>(null);
 
-  const categories = ['All', 'Weapon', 'Card', 'Headgear', 'Consumable'];
+  const categories = ['All', 'Weapon', 'Card', 'Headgear', 'Consumable', 'Armor'];
 
   const filteredItems = filterMarketItems(items, searchQuery, selectedCategory);
 
@@ -188,7 +189,7 @@ export const PronteraMarket: React.FC<PronteraMarketProps> = ({ activeLanguage }
             <div
               key={item.id}
               onClick={() => setSelectedItem(item)}
-              className="group bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-amber-400/70 rounded-2xl p-5 transition-all duration-300 shadow-lg hover:shadow-amber-500/10 cursor-pointer flex flex-col justify-between relative overflow-hidden"
+              className="group bg-slate-900/90 hover:bg-slate-800/90 border border-slate-800 hover:border-amber-400/70 rounded-2xl p-5 transition-all duration-300 shadow-lg hover:shadow-amber-500/10 cursor-pointer flex flex-col justify-between relative overflow-hidden"
             >
               {/* Top RO Speech Bubble Header */}
               <div className="mb-3.5">
@@ -251,6 +252,23 @@ export const PronteraMarket: React.FC<PronteraMarketProps> = ({ activeLanguage }
           <span> • Real-time synchronization with Midgard Channel 1</span>
         </div>
 
+        {whisperNotice && (
+          <div
+            role="status"
+            className="mt-4 max-w-xl mx-auto px-4 py-3 rounded-xl bg-emerald-500/15 border border-emerald-400/50 text-emerald-200 text-xs font-semibold flex items-center justify-between gap-3 shadow-lg"
+          >
+            <span>{whisperNotice}</span>
+            <button
+              type="button"
+              onClick={() => setWhisperNotice(null)}
+              aria-label="Dismiss whisper confirmation"
+              className="text-emerald-300 hover:text-white cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
       </div>
 
       {/* Modal: Item Details Inspector */}
@@ -282,6 +300,7 @@ export const PronteraMarket: React.FC<PronteraMarketProps> = ({ activeLanguage }
                 {selectedItem.category === 'Card' && '🎴'}
                 {selectedItem.category === 'Headgear' && '👑'}
                 {selectedItem.category === 'Consumable' && '🥞'}
+                {selectedItem.category === 'Armor' && '🛡️'}
               </div>
               <div>
                 <h3 className="text-base font-bold text-white">{selectedItem.itemName}</h3>
@@ -315,7 +334,9 @@ export const PronteraMarket: React.FC<PronteraMarketProps> = ({ activeLanguage }
               <button
                 type="button"
                 onClick={() => {
-                  alert(`Sent in-game whisper to ${selectedItem.seller}: "Interested in buying [${selectedItem.itemName}]!"`);
+                  setWhisperNotice(
+                    `Sent in-game whisper to ${selectedItem.seller}: "Interested in buying [${selectedItem.itemName}]!"`
+                  );
                   setSelectedItem(null);
                 }}
                 className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 font-bold text-xs uppercase tracking-wider hover:from-amber-300 hover:to-yellow-300 transition-all cursor-pointer"

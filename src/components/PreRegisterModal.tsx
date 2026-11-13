@@ -279,9 +279,7 @@ export const PreRegisterModal: React.FC<PreRegisterModalProps> = ({
 
             <div className="flex gap-3">
               <a
-                href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/?location=hero_banner"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#go2offer#"
                 className="flex-1 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all"
               >
                 Wishlist on Steam Now

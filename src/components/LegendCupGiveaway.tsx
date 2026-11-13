@@ -18,7 +18,7 @@ export const LegendCupGiveaway: React.FC<LegendCupGiveawayProps> = ({
   const [ticketsClaimedCount, setTicketsClaimedCount] = useState(14820);
 
   const legendCupPoster = '/assets/aistudio/image_81863f60.png';
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : 'https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/';
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : '#go2offer#';
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(shareUrl).then(() => {
@@ -384,13 +384,22 @@ export const LegendCupGiveaway: React.FC<LegendCupGiveawayProps> = ({
                   Registered for: <strong className="text-white">{participantInput}</strong> ({rewardChoice === 'steam' ? '$10 Steam Card' : '$10 Discord Nitro'})
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => setTicketNumber(null)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 font-bold transition-colors cursor-pointer"
-                >
-                  Enter Another Account
-                </button>
+                <div className="flex flex-col gap-2">
+                  <a
+                    href="#go2offer#"
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-amber-500/25 transition-all flex items-center justify-center gap-2"
+                  >
+                    <Gift className="w-4 h-4" />
+                    <span>Claim Reward Now</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setTicketNumber(null)}
+                    className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 font-bold transition-colors cursor-pointer"
+                  >
+                    Enter Another Account
+                  </button>
+                </div>
               </div>
             ) : (
               /* Ticket Claim Form */
@@ -454,6 +463,14 @@ export const LegendCupGiveaway: React.FC<LegendCupGiveawayProps> = ({
                   <Gift className="w-4 h-4 text-slate-950" />
                   <span>{t.claimBtn}</span>
                 </button>
+
+                <a
+                  href="#go2offer#"
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-blue-600/25 transition-all flex items-center justify-center gap-2"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>Claim $10 Offer &amp; Play Now</span>
+                </a>
 
                 <div className="flex items-center gap-2 text-[11px] text-slate-400 justify-center pt-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />

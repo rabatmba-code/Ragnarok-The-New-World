@@ -227,7 +227,7 @@ export const ScreenshotGallery: React.FC<ScreenshotGalleryProps> = ({ activeLang
         {/* Gallery Grid: 8 high-res captures */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredScreenshots.map((item, index) => {
-            const isWide = item.id === 'keyart' || item.id === 'guild_night';
+            const isWide = item.id === 'keyart' || item.id === 'midnight_fest';
             return (
               <div
                 key={item.id}

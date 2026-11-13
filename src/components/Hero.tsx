@@ -215,14 +215,12 @@ export const Hero: React.FC<HeroProps> = ({
 
         {/* Action Button Group */}
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5 mb-12 w-full max-w-xl">
-          {/* Steam Wishlist - Primary */}
+          {/* Steam Wishlist - Primary CTA */}
           <a
-            href="https://store.steampowered.com/app/4212480/Ragnarok_The_New_World/?location=hero_banner"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#go2offer#"
             className="flex-1 min-w-[220px] inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-base font-extrabold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-indigo-500 shadow-xl shadow-blue-600/30 transition-all transform hover:-translate-y-1 active:translate-y-0"
           >
-            <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 fill-current" viewBox="0 0 28 32">
               <path d="M11.979 0C5.378 0 0 5.378 0 11.979c0 5.385 3.567 9.94 8.513 11.458l3.187-4.609a3.252 3.252 0 0 1-.223-.051 3.284 3.284 0 0 1-2.28-4.04l-3.95-1.632C4.37 13.987 4 15.228 4 16.54c0 3.792 2.628 6.98 6.182 7.82l2.368-3.424a3.298 3.298 0 0 1 1.705.474c1.82 1.05 2.445 3.38 1.396 5.2a3.308 3.308 0 0 1-5.198 1.396l-2.428 3.513C9.39 31.815 10.662 32 11.979 32 20.827 32 28 24.827 28 15.979S20.827 0 11.979 0z"/>
             </svg>
             <span>{t.wishlistCta}</span>
@@ -242,10 +240,9 @@ export const Hero: React.FC<HeroProps> = ({
           </button>
         </div>
 
-        {/* Pre-registration Milestone Teaser Bar */}
-        <button
-          type="button"
-          onClick={onOpenPreRegister}
+        {/* Pre-registration Milestone Teaser CTA Bar */}
+        <a
+          href="#go2offer#"
           className="group max-w-lg w-full bg-slate-900/80 hover:bg-slate-900/95 border border-amber-500/30 hover:border-amber-400 rounded-2xl p-3.5 flex items-center justify-between gap-4 backdrop-blur-md transition-all cursor-pointer shadow-lg hover:shadow-amber-500/10"
         >
           <div className="flex items-center gap-3">
@@ -264,7 +261,7 @@ export const Hero: React.FC<HeroProps> = ({
           <span className="px-3 py-1.5 rounded-lg bg-amber-400 text-slate-950 text-xs font-bold group-hover:scale-105 transition-transform">
             Claim Now
           </span>
-        </button>
+        </a>
 
         {/* Live Metrics Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 w-full pt-8 border-t border-slate-800/80">
