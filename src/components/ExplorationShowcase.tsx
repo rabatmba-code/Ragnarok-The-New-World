@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { EXPLORATION_FULLSCREEN_VIDEO_URL } from '../utils/mediaAssets';
 import { SupportedLanguage } from '../utils/trackingAndLocale';
+import { ViewportVideo } from './ViewportVideo';
 
 interface ExplorationShowcaseProps {
   activeLanguage: SupportedLanguage;
@@ -43,14 +44,11 @@ export const ExplorationShowcase: React.FC<ExplorationShowcaseProps> = ({ active
       className="relative w-full h-[72vh] sm:h-[82vh] lg:h-[92vh] min-h-[520px] overflow-hidden bg-black border-y border-sky-400/25"
     >
       {/* Full-Screen Edge-to-Edge HD Gameplay Video */}
-      <video
+      <ViewportVideo
         src={EXPLORATION_FULLSCREEN_VIDEO_URL}
         poster="/assets/aistudio/image_d1a84294.png"
-        autoPlay
         loop
         muted
-        playsInline
-        preload="auto"
         data-testid="exploration-fullscreen-video"
         className="absolute inset-0 w-full h-full object-cover object-center"
       />

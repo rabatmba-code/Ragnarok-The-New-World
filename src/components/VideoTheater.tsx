@@ -10,7 +10,9 @@ interface VideoTheaterProps {
 export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) => {
   const [activeTab, setActiveTab] = useState<'trailer1' | 'trailer2'>('trailer1');
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const userPausedRef = useRef(false);
 
@@ -22,11 +24,52 @@ export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) =>
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || typeof IntersectionObserver === 'undefined') {
+      setShouldLoad(true);
+      setIsVisible(true);
+      return;
+    }
 
-    userPausedRef.current = false;
+    const loadObs = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShouldLoad(true);
+          loadObs.disconnect();
+        }
+      },
+      { rootMargin: '500px 0px' }
+    );
+
+    const viewObs = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: '100px 0px', threshold: 0.05 }
+    );
+
+    loadObs.observe(video);
+    viewObs.observe(video);
+
+    return () => {
+      loadObs.disconnect();
+      viewObs.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !shouldLoad) return;
+
+    if (!isVisible) {
+      if (!video.paused) video.pause();
+      return;
+    }
+
+    if (userPausedRef.current) return;
+
     video.muted = isMuted;
-    video.load();
     video
       .play()
       .then(() => setIsPlaying(true))
@@ -38,24 +81,7 @@ export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) =>
           .then(() => setIsPlaying(true))
           .catch(() => setIsPlaying(false));
       });
-  }, [activeTab]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const checkInterval = setInterval(() => {
-      if (video.paused && !userPausedRef.current) {
-        video.muted = true;
-        video
-          .play()
-          .then(() => setIsPlaying(true))
-          .catch(() => {});
-      }
-    }, 2500);
-
-    return () => clearInterval(checkInterval);
-  }, [activeTab]);
+  }, [activeTab, shouldLoad, isVisible]);
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -275,13 +301,13 @@ export const VideoTheater: React.FC<VideoTheaterProps> = ({ activeLanguage }) =>
             <video
               ref={videoRef}
               key={activeVideoUrl}
-              src={activeVideoUrl}
+              src={shouldLoad ? activeVideoUrl : undefined}
               poster={activePoster}
-              autoPlay
+              autoPlay={shouldLoad && isVisible}
               playsInline
               loop
               muted={isMuted}
-              preload="metadata"
+              preload={shouldLoad ? 'auto' : 'none'}
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               className="w-full h-full object-contain cursor-pointer"

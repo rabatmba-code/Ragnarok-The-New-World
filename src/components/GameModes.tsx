@@ -641,6 +641,8 @@ export const GameModes: React.FC<GameModesProps> = ({
               <img
                 src={currentImage}
                 alt={currentMode.title}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 cursor-pointer"
                 onClick={() => onInspectImage(currentImage, currentMode.caption)}
               />

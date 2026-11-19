@@ -65,6 +65,8 @@ export const FooterAndSpecs: React.FC<FooterAndSpecsProps> = ({ activeLanguage }
             <img
               src="/assets/official_chibi_logo.png"
               alt="Ragnarok: The New World Chibi Official Crest"
+              loading="lazy"
+              decoding="async"
               className="h-10 w-auto object-contain rounded-lg"
             />
           </div>

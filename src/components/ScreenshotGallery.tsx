@@ -623,6 +623,8 @@ export const ScreenshotGallery: React.FC<ScreenshotGalleryProps> = ({ activeLang
                 <img
                   src={item.src}
                   alt={copy.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
 
@@ -693,6 +695,7 @@ export const ScreenshotGallery: React.FC<ScreenshotGalleryProps> = ({ activeLang
               <img
                 src={activeLightboxItem.src}
                 alt={activeLightboxCopy.title}
+                decoding="async"
                 className="max-w-full max-h-[70vh] object-contain"
               />
 

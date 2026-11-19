@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { SupportedLanguage } from '../utils/trackingAndLocale';
 import { LAUNCH_CLASSES_VIDEO_URL } from '../utils/mediaAssets';
+import { ViewportVideo } from './ViewportVideo';
 
 interface LaunchOverviewAndGuideProps {
   activeLanguage: SupportedLanguage;
@@ -647,15 +648,12 @@ export const LaunchOverviewAndGuide: React.FC<LaunchOverviewAndGuideProps> = ({
           {/* Official Classes & Gameplay Video Directly Above 8 Launch Classes */}
           <div className="relative rounded-3xl overflow-hidden border border-sky-400/35 bg-slate-950/90 shadow-2xl shadow-sky-950/40">
             <div className="relative aspect-video w-full bg-black">
-              <video
+              <ViewportVideo
                 src={LAUNCH_CLASSES_VIDEO_URL}
                 poster="/assets/aistudio/image_2f98b010.png"
-                autoPlay
                 loop
                 muted
-                playsInline
                 controls
-                preload="auto"
                 data-testid="classes-showcase-video"
                 className="w-full h-full object-cover"
               />

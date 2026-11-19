@@ -1,0 +1,13 @@
+# Long-term immutable browser & CDN caching for static assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Always revalidate HTML entry, service worker, and Google Search Console verification
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+/googlef4b4f26b1fe204c0.html
+  Cache-Control: public, max-age=0, must-revalidate

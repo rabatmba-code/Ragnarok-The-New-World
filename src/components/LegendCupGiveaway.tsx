@@ -204,6 +204,8 @@ export const LegendCupGiveaway: React.FC<LegendCupGiveawayProps> = ({
             <img
               src={legendCupPoster}
               alt={t.headline}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/40 pointer-events-none" />

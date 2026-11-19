@@ -160,6 +160,8 @@ export const SeasonalSpotlight: React.FC<SeasonalSpotlightProps> = ({
                 <img
                   src={kittyImg}
                   alt={t.kittyTitle}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700"
                   onClick={() => onInspectImage(kittyImg, t.kittyTitle)}
                 />
@@ -223,6 +225,8 @@ export const SeasonalSpotlight: React.FC<SeasonalSpotlightProps> = ({
                 <img
                   src={siegeImg}
                   alt={t.siegeTitle}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700"
                   onClick={() => onInspectImage(siegeImg, t.siegeTitle)}
                 />

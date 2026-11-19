@@ -1,19 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero, HeroStatsBar } from './components/Hero';
 import { HERO_VIDEO_1_URL } from './utils/mediaAssets';
-import { LaunchOverviewAndGuide } from './components/LaunchOverviewAndGuide';
-import { LegendCupGiveaway } from './components/LegendCupGiveaway';
-import { SeasonalSpotlight } from './components/SeasonalSpotlight';
-import { SkyDescentMiniGame } from './components/SkyDescentMiniGame';
-import { ExplorationShowcase } from './components/ExplorationShowcase';
-import { VideoTheater } from './components/VideoTheater';
-import { GameModes } from './components/GameModes';
-import { PronteraMarket } from './components/PronteraMarket';
-import { ClassSelector } from './components/ClassSelector';
-import { ScreenshotGallery } from './components/ScreenshotGallery';
-import { PreRegisterModal } from './components/PreRegisterModal';
-import { FooterAndSpecs } from './components/FooterAndSpecs';
 import { ConsentBanner } from './components/ConsentBanner';
 import { X } from 'lucide-react';
 import {
@@ -22,6 +10,63 @@ import {
   parseAbAngle,
   trackCtaClick,
 } from './utils/trackingAndLocale';
+
+// Code-split below-the-fold sections so Hero + Navbar + Stats paint immediately on PC
+const LaunchOverviewAndGuide = lazy(() =>
+  import('./components/LaunchOverviewAndGuide').then((m) => ({
+    default: m.LaunchOverviewAndGuide,
+  }))
+);
+const LegendCupGiveaway = lazy(() =>
+  import('./components/LegendCupGiveaway').then((m) => ({
+    default: m.LegendCupGiveaway,
+  }))
+);
+const SeasonalSpotlight = lazy(() =>
+  import('./components/SeasonalSpotlight').then((m) => ({
+    default: m.SeasonalSpotlight,
+  }))
+);
+const SkyDescentMiniGame = lazy(() =>
+  import('./components/SkyDescentMiniGame').then((m) => ({
+    default: m.SkyDescentMiniGame,
+  }))
+);
+const ExplorationShowcase = lazy(() =>
+  import('./components/ExplorationShowcase').then((m) => ({
+    default: m.ExplorationShowcase,
+  }))
+);
+const VideoTheater = lazy(() =>
+  import('./components/VideoTheater').then((m) => ({
+    default: m.VideoTheater,
+  }))
+);
+const GameModes = lazy(() =>
+  import('./components/GameModes').then((m) => ({
+    default: m.GameModes,
+  }))
+);
+const PronteraMarket = lazy(() =>
+  import('./components/PronteraMarket').then((m) => ({
+    default: m.PronteraMarket,
+  }))
+);
+const ClassSelector = lazy(() =>
+  import('./components/ClassSelector').then((m) => ({
+    default: m.ClassSelector,
+  }))
+);
+const ScreenshotGallery = lazy(() =>
+  import('./components/ScreenshotGallery').then((m) => ({
+    default: m.ScreenshotGallery,
+  }))
+);
+const FooterAndSpecs = lazy(() =>
+  import('./components/FooterAndSpecs').then((m) => ({
+    default: m.FooterAndSpecs,
+  }))
+);
 
 function getInitialLanguage(): SupportedLanguage {
   if (typeof window === 'undefined') return 'en';
@@ -56,12 +101,34 @@ function getInitialAngle(): string {
 }
 
 export default function App() {
-  const [isPreRegisterOpen, setIsPreRegisterOpen] = useState(false);
   const [activeLanguage, setActiveLanguage] = useState<SupportedLanguage>(getInitialLanguage);
   const [activeAngle] = useState<string>(getInitialAngle);
+  const [enableSiteBgVideo, setEnableSiteBgVideo] = useState(false);
 
   // Inspect Image Modal state
   const [inspectImage, setInspectImage] = useState<{ src: string; caption: string } | null>(null);
+
+  // Defer below-hero continuous background video slightly so Hero Video 1 gets 100% initial bandwidth
+  useEffect(() => {
+    let activated = false;
+    const activate = () => {
+      if (activated) return;
+      activated = true;
+      setEnableSiteBgVideo(true);
+      window.removeEventListener('scroll', onScroll);
+    };
+    const onScroll = () => {
+      if (window.scrollY > 40) {
+        activate();
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    const timer = window.setTimeout(activate, 1100);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
 
   // Sync HTML lang attribute and persisted preference whenever language changes
   useEffect(() => {
@@ -95,12 +162,13 @@ export default function App() {
     }
   };
 
+  const noop = () => {};
+
   return (
     <div className="min-h-screen bg-[#070b16] text-slate-100 flex flex-col font-sans selection:bg-sky-500 selection:text-white">
-      
       {/* Navigation */}
       <Navbar
-        onOpenPreRegister={() => setIsPreRegisterOpen(true)}
+        onOpenPreRegister={noop}
         onOpenVideo={scrollToVideo}
         activeLanguage={activeLanguage}
         onChangeLanguage={setActiveLanguage}
@@ -108,10 +176,9 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1">
-        
         {/* Hero Section */}
         <Hero
-          onOpenPreRegister={() => setIsPreRegisterOpen(true)}
+          onOpenPreRegister={noop}
           onOpenVideo={scrollToVideo}
           activeLanguage={activeLanguage}
           activeAngle={activeAngle}
@@ -124,13 +191,13 @@ export default function App() {
             className="sticky top-0 h-screen -mb-[100vh] pointer-events-none overflow-hidden z-0"
           >
             <video
-              src={HERO_VIDEO_1_URL}
+              src={enableSiteBgVideo ? HERO_VIDEO_1_URL : undefined}
               poster="/assets/aistudio/image_2f98b010.png"
-              autoPlay
+              autoPlay={enableSiteBgVideo}
               loop
               muted
               playsInline
-              preload="auto"
+              preload={enableSiteBgVideo ? 'auto' : 'none'}
               data-testid="site-bg-video"
               className="w-full h-full object-cover object-center brightness-[0.44] contrast-[1.08] scale-[1.02]"
             />
@@ -141,67 +208,61 @@ export default function App() {
             {/* 4-Stat Highlights Bar Directly Under Hero */}
             <HeroStatsBar activeLanguage={activeLanguage} />
 
-            {/* Official Release Overview: Concept, 2002 Distinction, 8 Features/Druid, 5-Step Login & PC Specs */}
-            <LaunchOverviewAndGuide
-              activeLanguage={activeLanguage}
-              onChangeLanguage={setActiveLanguage}
-            />
+            <Suspense fallback={<div className="min-h-[400px]" />}>
+              {/* Official Release Overview: Concept, 2002 Distinction, 8 Features/Druid, 5-Step Login & PC Specs */}
+              <LaunchOverviewAndGuide
+                activeLanguage={activeLanguage}
+                onChangeLanguage={setActiveLanguage}
+              />
 
-            {/* Official Legend Cup Tournament & Play Stages / Collect Tokens */}
-            <LegendCupGiveaway
-              activeLanguage={activeLanguage}
-              onInspectImage={(src, caption) => setInspectImage({ src, caption })}
-            />
+              {/* Official Legend Cup Tournament & Play Stages / Collect Tokens */}
+              <LegendCupGiveaway
+                activeLanguage={activeLanguage}
+                onInspectImage={(src, caption) => setInspectImage({ src, caption })}
+              />
 
-            {/* Official Seasonal Highlights: Campus Kitty Wonder Tour & Imperial Siege War */}
-            <SeasonalSpotlight
-              activeLanguage={activeLanguage}
-              onInspectImage={(src, caption) => setInspectImage({ src, caption })}
-            />
+              {/* Official Seasonal Highlights: Campus Kitty Wonder Tour & Imperial Siege War */}
+              <SeasonalSpotlight
+                activeLanguage={activeLanguage}
+                onInspectImage={(src, caption) => setInspectImage({ src, caption })}
+              />
 
-            {/* PC Hardcore Sky Descent Mini-Game: Midgard Sky Dive */}
-            <SkyDescentMiniGame activeLanguage={activeLanguage} />
+              {/* PC Hardcore Sky Descent Mini-Game: Midgard Sky Dive */}
+              <SkyDescentMiniGame activeLanguage={activeLanguage} />
 
-            {/* Section 6: Full-Screen Edge-to-Edge HD Open-World Exploration Video */}
-            <ExplorationShowcase activeLanguage={activeLanguage} />
+              {/* Section 6: Full-Screen Edge-to-Edge HD Open-World Exploration Video */}
+              <ExplorationShowcase activeLanguage={activeLanguage} />
 
-            {/* Video Theater (Direct HD MP4 Trailers) */}
-            <VideoTheater activeLanguage={activeLanguage} />
+              {/* Video Theater (Direct HD MP4 Trailers) */}
+              <VideoTheater activeLanguage={activeLanguage} />
 
-            {/* 4 Pillars of Game Living ("Mode de Jeu") */}
-            <GameModes
-              activeLanguage={activeLanguage}
-              onInspectImage={(src, caption) => setInspectImage({ src, caption })}
-            />
+              {/* 4 Pillars of Game Living ("Mode de Jeu") */}
+              <GameModes
+                activeLanguage={activeLanguage}
+                onInspectImage={(src, caption) => setInspectImage({ src, caption })}
+              />
 
-            {/* Interactive Prontera Street Market Simulator */}
-            <PronteraMarket activeLanguage={activeLanguage} />
+              {/* Interactive Prontera Street Market Simulator */}
+              <PronteraMarket activeLanguage={activeLanguage} />
 
-            {/* 8 Launch Classes & Destiny Quiz */}
-            <ClassSelector activeLanguage={activeLanguage} />
+              {/* 8 Launch Classes & Destiny Quiz */}
+              <ClassSelector activeLanguage={activeLanguage} />
 
-            {/* Official Screenshot Vault Lightbox */}
-            <ScreenshotGallery activeLanguage={activeLanguage} />
+              {/* Official Screenshot Vault Lightbox */}
+              <ScreenshotGallery activeLanguage={activeLanguage} />
 
-            {/* Footer & Official Publisher Attribution */}
-            <FooterAndSpecs
-              onOpenPreRegister={() => setIsPreRegisterOpen(true)}
-              activeLanguage={activeLanguage}
-            />
+              {/* Footer & Official Publisher Attribution */}
+              <FooterAndSpecs
+                onOpenPreRegister={noop}
+                activeLanguage={activeLanguage}
+              />
+            </Suspense>
           </div>
         </div>
-
       </main>
 
       {/* Google Consent Mode v2 Banner */}
       <ConsentBanner activeLanguage={activeLanguage} />
-
-      {/* Pre-Registration Modal */}
-      <PreRegisterModal
-        isOpen={isPreRegisterOpen}
-        onClose={() => setIsPreRegisterOpen(false)}
-        activeLanguage={activeLanguage}
-      />
 
       {/* Standalone Image Inspector Modal */}
       {inspectImage && (
@@ -221,7 +282,7 @@ export default function App() {
                 type="button"
                 onClick={() => setInspectImage(null)}
                 aria-label="Close Inspector"
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -231,6 +292,7 @@ export default function App() {
               <img
                 src={inspectImage.src}
                 alt="Game Inspection"
+                decoding="async"
                 className="max-w-full max-h-[75vh] object-contain"
               />
             </div>
@@ -241,7 +303,6 @@ export default function App() {
           </div>
         </div>
       )}
-
     </div>
   );
 }

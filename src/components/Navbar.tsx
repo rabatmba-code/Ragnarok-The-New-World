@@ -167,6 +167,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             <img
               src="/assets/official_chibi_logo.png"
               alt="Ragnarok: The New World Chibi Official Logo"
+              fetchPriority="high"
+              decoding="async"
               className="h-9 sm:h-10 w-auto object-contain rounded-xl"
             />
           </div>

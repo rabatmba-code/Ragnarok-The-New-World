@@ -23,6 +23,7 @@ const HERO_VIDEOS = [
 
 export const Hero: React.FC<HeroProps> = ({ activeLanguage }) => {
   const [videoIdx, setVideoIdx] = useState<0 | 1>(0);
+  const [firstVideoPlaying, setFirstVideoPlaying] = useState(false);
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([null, null]);
 
   const advanceToNextVideo = useCallback(() => {
@@ -88,6 +89,7 @@ export const Hero: React.FC<HeroProps> = ({ activeLanguage }) => {
       <div className="absolute inset-0 z-0 bg-[#080c14]">
         {HERO_VIDEOS.map((vid, idx) => {
           const isActive = videoIdx === idx;
+          const preloadMode = idx === 0 || firstVideoPlaying || isActive ? 'auto' : 'metadata';
           return (
             <video
               key={vid.src}
@@ -99,8 +101,13 @@ export const Hero: React.FC<HeroProps> = ({ activeLanguage }) => {
               autoPlay={idx === 0}
               muted
               playsInline
-              preload="auto"
+              preload={preloadMode}
               data-testid={`hero-video-${idx}`}
+              onPlaying={() => {
+                if (idx === 0 && !firstVideoPlaying) {
+                  setFirstVideoPlaying(true);
+                }
+              }}
               onEnded={() => {
                 if (videoIdx === idx) {
                   advanceToNextVideo();
