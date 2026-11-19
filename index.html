@@ -3,37 +3,199 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Pre-render Language Detection (en, id, th, zh) & A/B Angle Assignment (?angle=) -->
     <script>
-      (function() {
+      (function () {
+        try {
+          var SUPPORTED = ['en', 'id', 'th', 'zh'];
+          var params = new URLSearchParams(window.location.search);
+
+          function normalizeLang(raw) {
+            if (!raw) return null;
+            var code = String(raw).toLowerCase().trim();
+            if (code.indexOf('id') === 0) return 'id';
+            if (code.indexOf('th') === 0) return 'th';
+            if (code.indexOf('zh') === 0) return 'zh';
+            if (code.indexOf('en') === 0) return 'en';
+            return null;
+          }
+
+          var detected = normalizeLang(params.get('lang'));
+          if (!detected) {
+            try {
+              detected = normalizeLang(window.localStorage.getItem('ro_lang'));
+            } catch (e) {}
+          }
+          if (!detected) {
+            var navLangs = Array.isArray(navigator.languages) && navigator.languages.length
+              ? navigator.languages
+              : [navigator.language || 'en'];
+            for (var i = 0; i < navLangs.length; i++) {
+              var match = normalizeLang(navLangs[i]);
+              if (match && SUPPORTED.indexOf(match) !== -1) {
+                detected = match;
+                break;
+              }
+            }
+          }
+          if (!detected) detected = 'en';
+
+          document.documentElement.lang = detected === 'zh' ? 'zh-Hans' : detected;
+          document.documentElement.dataset.lang = detected;
+          window.__RO_INITIAL_LANG__ = detected;
+
+          // A/B Testing Angle (?angle=)
+          var rawAngle = params.get('angle');
+          var angle = rawAngle
+            ? String(rawAngle).toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 40) || 'default'
+            : 'default';
+          if (rawAngle) {
+            try { window.sessionStorage.setItem('ro_ab_angle', angle); } catch (e) {}
+          } else {
+            try {
+              var savedAngle = window.sessionStorage.getItem('ro_ab_angle');
+              if (savedAngle) angle = savedAngle;
+            } catch (e) {}
+          }
+          document.documentElement.dataset.angle = angle;
+          window.__RO_AB_ANGLE__ = angle;
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Google Consent Mode v2 Defaults + A/B DataLayer Bootstrap -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+
+      (function () {
+        var savedConsent = null;
+        try {
+          savedConsent = window.localStorage.getItem('ro_consent_state');
+        } catch (e) {}
+
+        var granted = savedConsent === 'granted';
+        gtag('consent', 'default', {
+          ad_storage: granted ? 'granted' : 'denied',
+          ad_user_data: granted ? 'granted' : 'denied',
+          ad_personalization: granted ? 'granted' : 'denied',
+          analytics_storage: granted ? 'granted' : 'denied',
+          functionality_storage: 'granted',
+          security_storage: 'granted',
+          wait_for_update: 500
+        });
+
+        window.dataLayer.push({
+          event: 'ab_angle_assigned',
+          ab_angle: window.__RO_AB_ANGLE__ || 'default',
+          detected_lang: window.__RO_INITIAL_LANG__ || 'en'
+        });
+
+        window.__updateRoConsent = function (allowAll) {
+          var status = allowAll ? 'granted' : 'denied';
+          try {
+            window.localStorage.setItem('ro_consent_state', status);
+          } catch (e) {}
+          gtag('consent', 'update', {
+            ad_storage: status,
+            ad_user_data: status,
+            ad_personalization: status,
+            analytics_storage: status
+          });
+          window.dataLayer.push({
+            event: 'consent_preference_updated',
+            consent_status: status,
+            ab_angle: window.__RO_AB_ANGLE__ || 'default'
+          });
+        };
+      })();
+    </script>
+
+    <script>
+      (function () {
         try {
           var originalFetch = window.fetch;
           var activeFetch = originalFetch;
           Object.defineProperty(window, 'fetch', {
             configurable: true,
             enumerable: true,
-            get: function() {
+            get: function () {
               return activeFetch;
             },
-            set: function(newFetch) {
+            set: function (newFetch) {
               activeFetch = newFetch;
             }
           });
         } catch (e) {}
       })();
     </script>
-    <title>Ragnarok: The New World | Next-Gen Open World Anime MMORPG</title>
-    <meta name="description" content="Experience the next-generation open world MMORPG. Live, explore, socialize, trade in Prontera, and embark on legendary adventures across Midgard." />
-    <meta property="og:title" content="Ragnarok: The New World | Next-Gen Open World Anime MMORPG" />
-    <meta property="og:description" content="Immerse in Midgard: living open world, Prontera street markets, deep class builds, romantic weddings, and free adventure." />
+
+    <title>Ragnarok: The New World | Free-to-Play Open World MMORPG</title>
+    <meta
+      name="description"
+      content="Play Ragnarok: The New World by Gravity Game Vision Limited. Free-to-play PC MMORPG with 8 launch classes including shapeshifting Druid, free resets, job switching & idle progression."
+    />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ragnarok: The New World" />
+    <meta property="og:title" content="Ragnarok: The New World | Free-to-Play Open World MMORPG" />
+    <meta
+      property="og:description"
+      content="Standalone next-gen MMORPG by Gravity Game Vision Limited — 8 launch classes including Druid, open-world bosses, guilds, free stat/skill resets & Steam launch."
+    />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="twitter:title" content="Ragnarok: The New World | Free-to-Play Open World MMORPG" />
+    <meta
+      name="twitter:description"
+      content="Free-to-play PC MMORPG by Gravity Game Vision Limited. 8 launch classes including shapeshifting Druid, free resets, job switching & idle progression."
+    />
+
+    <!-- Schema.org Structured Data (JSON-LD VideoGame) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Ragnarok: The New World",
+        "alternateName": "RO: The New World",
+        "description": "A standalone free-to-play open-world MMORPG (with optional in-game purchases) published by Gravity Game Vision Limited, distinct from the original 2002 Ragnarok Online. Features 8 launch classes including the shapeshifting Druid, multiplayer co-op, guilds, boss raids, free stat & skill resets, job switching, and idle progression.",
+        "applicationCategory": "Game",
+        "genre": ["MMORPG", "Open World", "Action RPG", "Fantasy"],
+        "gamePlatform": ["PC", "Steam"],
+        "operatingSystem": "Windows 10/11 64-bit",
+        "memoryRequirements": "12 GB RAM minimum, 16 GB RAM recommended",
+        "storageRequirements": "30 GB available space",
+        "playMode": ["MultiPlayer", "CoOp"],
+        "inLanguage": ["en", "id", "th", "zh-Hans"],
+        "publisher": {
+          "@type": "Organization",
+          "name": "Gravity Game Vision Limited"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Gravity Game Vision Limited"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "category": "Free-to-Play with optional in-game purchases",
+          "availability": "https://schema.org/InStock"
+        }
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="bg-[#0b0f19] text-slate-100 antialiased selection:bg-amber-400 selection:text-slate-950 overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

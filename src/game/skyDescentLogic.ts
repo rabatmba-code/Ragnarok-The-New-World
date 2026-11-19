@@ -1,4 +1,4 @@
-export const TOTAL_DURATION = 120;
+export const TOTAL_DURATION = 30;
 
 export interface SkyItemTemplate {
   kind: 'good' | 'bad';
@@ -72,8 +72,8 @@ export function formatSkyTime(sec: number): string {
 }
 
 export function getSkyRank(score: number): string {
-  if (score >= 2200) return 'S-Rank Sky Hero';
-  if (score >= 1100) return 'A-Rank Cloud Ace';
+  if (score >= 900) return 'S-Rank Sky Hero';
+  if (score >= 450) return 'A-Rank Cloud Ace';
   return 'B-Rank Midgard Diver';
 }
 

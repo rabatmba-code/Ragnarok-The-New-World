@@ -1,8 +1,9 @@
 import React from 'react';
-import { Sparkles, Swords, Shirt, Eye, Shield, Trophy, Flame, Cat, Heart } from 'lucide-react';
+import { Sparkles, Eye, Flame, Cat } from 'lucide-react';
+import { SupportedLanguage } from '../utils/trackingAndLocale';
 
 interface SeasonalSpotlightProps {
-  activeLanguage: 'en' | 'fil' | 'fr' | 'ar';
+  activeLanguage: string;
   onInspectImage: (src: string, caption: string) => void;
 }
 
@@ -10,7 +11,28 @@ export const SeasonalSpotlight: React.FC<SeasonalSpotlightProps> = ({
   activeLanguage,
   onInspectImage,
 }) => {
-  const content = {
+  const content: Record<
+    SupportedLanguage,
+    {
+      tag: string;
+      heading: string;
+      subheading: string;
+      kittyTitle: string;
+      kittyBadge: string;
+      kittyDesc: string;
+      kittyPill1: string;
+      kittyPill2: string;
+      kittyPill3: string;
+      siegeTitle: string;
+      siegeBadge: string;
+      siegeDesc: string;
+      siegePill1: string;
+      siegePill2: string;
+      siegePill3: string;
+      inspectShort: string;
+      inspectBtn: string;
+    }
+  > = {
     en: {
       tag: 'NEW SEASONAL HIGHLIGHTS & EVENTS',
       heading: 'Wonder Tour Outfits & Imperial Siege War',
@@ -28,91 +50,91 @@ export const SeasonalSpotlight: React.FC<SeasonalSpotlightProps> = ({
       siegeDesc:
         'Assemble your guild to storm ancient imperial fortifications, capture Emperium crystals, and defend your banners in massive cross-server Guild vs Guild warfare.',
       siegePill1: 'Imperial Castle Conquer',
-      siegePill2: '24+ Job Class Synergies',
+      siegePill2: '8 Launch Class Synergies',
       siegePill3: 'Legendary Guild Artifacts',
+      inspectShort: 'Inspect Art',
       inspectBtn: 'Inspect Full Resolution Art',
     },
-    fil: {
-      tag: 'MGA BAGONG PANG-SEASONG KAGANAPAN AT BALITA',
-      heading: 'Wonder Tour Kasuotan at Digmaang Pagkubkob',
+    id: {
+      tag: 'SOROTAN MUSIMAN & EVENT TERBARU',
+      heading: 'Kostum Wonder Tour & Perang Pengepungan (Siege War)',
       subheading:
-        'Damhin ang dalawang mukha ng Midgard: ang nakatutuwang estilong chibi ng Campus Kitty Wonder Tour, at ang maapoy na labanan ng mga guild sa cross-server Siege War.',
-      kittyTitle: 'Campus Kitty: Bagong Wonder Tour Outfit',
-      kittyBadge: 'Kasuotang Chibi at Alagang Pusa',
+        'Rasakan dua sisi pesona Midgard: gaya chibi imut dalam Campus Kitty Wonder Tour, serta bentrokan kolosal antar-guild dalam Siege War lintas server.',
+      kittyTitle: 'Campus Kitty: Kostum Kucing Wonder Tour',
+      kittyBadge: 'Lemari Chibi & Hewan Peliharaan',
       kittyDesc:
-        'Magsuot ng pastel blue sailor uniform, tainga ng pusa, at mag-alaga ng malalambing na kuting sa gitna ng Prontera. Tampok ang opisyal na Ragnarok: The New World chibi art.',
-      kittyPill1: 'Pastel Blue Sailor Uniform',
-      kittyPill2: 'Mga Alagang Kuting ng Midgard',
-      kittyPill3: 'Libreng Transmog sa Kasuotan',
+        'Kenakan seragam pelaut biru pastel, aksesori telinga kucing, dan adopsi anak kucing menggemaskan di pusat Prontera dengan ilustrasi chibi resmi Ragnarok: The New World.',
+      kittyPill1: 'Seragam Pelaut Kucing Pastel',
+      kittyPill2: 'Anak Kucing Midgard',
+      kittyPill3: 'Transmog Chibi Bebas Stat',
       siegeTitle: 'Siege War: War of Emperium (GvG)',
-      siegeBadge: 'Labanan ng mga Guild',
+      siegeBadge: 'Perang Guild Lintas Server',
       siegeDesc:
-        'Tipunin ang iyong guild upang lusubin ang mga kastilyo, agawin ang Emperium crystal, at ipagtanggol ang inyong bandera sa matinding cross-server guild warfare.',
-      siegePill1: 'Pagsakop sa Imperial Castle',
-      siegePill2: '24+ Sinerhiya ng mga Trabaho',
-      siegePill3: 'Maalamat na Guild Artifacts',
-      inspectBtn: 'Suriin ang Buong Larawan',
+        'Kumpulkan guild kamu untuk menyerbu benteng kekaisaran kuno, merebut kristal Emperium, dan mempertahankan panji kemenangan dalam perang GvG besar.',
+      siegePill1: 'Penaklukan Kastil Kekaisaran',
+      siegePill2: 'Sinergi 8 Kelas Rilis',
+      siegePill3: 'Artefak Guild Legendaris',
+      inspectShort: 'Lihat Karya',
+      inspectBtn: 'Lihat Gambar Resolusi Penuh',
     },
-    fr: {
-      tag: 'NOUVEAUX ÉVÉNEMENTS & ÉDITIONS SPÉCIALES',
-      heading: 'Tenues Wonder Tour & Guerre de Siège Impériale',
+    th: {
+      tag: 'ไฮไลต์ประจำซีซันและกิจกรรมใหม่',
+      heading: 'แฟชั่น Wonder Tour และสงครามชิงปราสาท Siege War',
       subheading:
-        'Vivez la double magie de Midgard : la mignonnerie chibi de Campus Kitty et l’intensité martiale de la Guerre de Siège inter-serveurs.',
-      kittyTitle: 'Campus Kitty : Nouvelle Tenue Wonder Tour',
-      kittyBadge: 'Garde-Robe Chibi & Compagnons',
+        'สัมผัสสองเสน่ห์แห่ง Midgard: แฟชั่นจิบิสุดน่ารักจาก Campus Kitty Wonder Tour และศึกสงครามกิลด์ข้ามเซิร์ฟเวอร์อันดุเดือดใน Siege War',
+      kittyTitle: 'Campus Kitty: ชุดแฟชั่นแมวเหมียว Wonder Tour',
+      kittyBadge: 'แฟชั่นจิบิและสัตว์เลี้ยง',
       kittyDesc:
-        'Enfilez des uniformes marins bleu pastel, oreilles de chat et cajolez de doux chatons à Prontera avec l’art officiel chibi de Ragnarok: The New World.',
-      kittyPill1: 'Costume Écolier Félid',
-      kittyPill2: 'Chatons de Compagnie',
-      kittyPill3: 'Transmogrification Chibi',
-      siegeTitle: 'Guerre de Siège : War of Emperium (GvG)',
-      siegeBadge: 'Choc de Guildes Inter-Serveurs',
+        'แต่งตัวด้วยชุดนักเรียนกะลาสีฟ้าพาสเทล หูแมวสุดน่ารัก และเลี้ยงลูกแมวขี้อ้อนใจกลางพรอนเทร่า พร้อมภาพอาร์ตเวิร์กจิบิอย่างเป็นทางการของ Ragnarok: The New World',
+      kittyPill1: 'ชุดกะลาสีพาสเทลลายแมว',
+      kittyPill2: 'ลูกแมวคู่หูแห่ง Midgard',
+      kittyPill3: 'เปลี่ยนลุคอิสระไม่กระทบค่าสเตตัส',
+      siegeTitle: 'Siege War: สงครามชิงปราสาท (GvG)',
+      siegeBadge: 'ศึกกิลด์ข้ามเซิร์ฟเวอร์',
       siegeDesc:
-        'Prenez d’assaut les forteresses impériales, capturez le cristal Emperium et défendez vos bannières dans des affrontements massifs de guildes.',
-      siegePill1: 'Conquête de Châteaux',
-      siegePill2: 'Synergies de 24+ Classes',
-      siegePill3: 'Artefacts de Guilde Légendaires',
-      inspectBtn: 'Inspecter en Haute Définition',
+        'รวมพลังสมาชิกกิลด์บุกทะลวงปราสาทจักรวรรดิ ยึดครองคริสตัล Emperium และปกป้องธงแห่งเกียรติยศในสงคราม GvG ขนาดมหึมา',
+      siegePill1: 'พิชิตปราสาทจักรวรรดิ',
+      siegePill2: 'คอมโบประสานงาน 8 อาชีพ',
+      siegePill3: 'สมบัติและวัตถุโบราณกิลด์ระดับตำนาน',
+      inspectShort: 'ดูภาพชัดๆ',
+      inspectBtn: 'ดูภาพความละเอียดเต็ม',
     },
-    ar: {
-      tag: 'أحدث فعاليات السيزون وتحديثات اللعبة',
-      heading: 'أزياء القطط اللطيفة وحرب الحصار الإمبراطورية (Siege War)',
+    zh: {
+      tag: '全新赛季亮点与特色活动',
+      heading: '奇妙巡游萌猫时装与帝国攻城战',
       subheading:
-        'عيش الجمال الحقيقي لعالم اللعبة: بين الستايل التشيبي اللطيف والقطط الوفية، وبين أقوى معارك الغيلد وحرب الحصار الاستراتيجية عبر السيرفرات.',
-      kittyTitle: 'أزياء Campus Kitty: جولة العجائب للقطط اللطيفة',
-      kittyBadge: 'أزياء تشيبي وقطط أليفة',
+        '领略米德加尔特的双重魅力：在校园萌猫巡游中尽享 Q 版治愈穿搭，并在跨服公会攻城战中体验热血激战。',
+      kittyTitle: '校园萌猫：奇妙巡游猫咪主题时装',
+      kittyBadge: 'Q 版衣橱与萌宠',
       kittyDesc:
-        'أزياء بحارة كلاسيكية باللون الأزرق السماوي مع آذان القطط وقطط صغيرة مرافقة فـ برونتيرا مع الشعار الرسمي الأسطوري للعبة.',
-      kittyPill1: 'أزياء بحارة باللون السماوي',
-      kittyPill2: 'قطط مرافقة حقيقية',
-      kittyPill3: 'تغيير شكل حر ومجاني',
-      siegeTitle: 'حرب الحصار: معركة الإمبراطورية (War of Emperium)',
-      siegeBadge: 'معارك الغيلد الكبرى (GvG)',
+        '换上清新淡蓝水手服与萌猫耳头饰，在普隆德拉街头邂逅软萌小猫伙伴，尽赏《Ragnarok: The New World》官方 Q 版原画。',
+      kittyPill1: '淡蓝萌猫水手制服',
+      kittyPill2: '可领养米德加尔特小猫',
+      kittyPill3: '无属性负担自由幻化',
+      siegeTitle: '帝国攻城战：公会据点争夺（GvG）',
+      siegeBadge: '跨服公会巅峰对决',
       siegeDesc:
-        'جمع أعضاء الغيلد ديالك وحاصر القلاع الإمبراطورية التاريخية، دمر كريستالة الإمبيريوم ورفع راية انتصارك فـ أضخم حروب السيرفرات.',
-      siegePill1: 'اقتحام قلاع السيرفرات',
-      siegePill2: 'تعاون أكثر من 24 مهنة',
-      siegePill3: 'أسلحة ورايات غيلد أسطورية',
-      inspectBtn: 'عرض الصورة بدقة كاملة',
+        '集结公会战友强攻古老帝国要塞，夺取华丽金属水晶，在恢弘的跨服公会战中捍卫荣耀战旗。',
+      siegePill1: '帝国城堡领地争夺',
+      siegePill2: '首发 8 大职业战术配合',
+      siegePill3: '传说级公会神器奖励',
+      inspectShort: '查看原画',
+      inspectBtn: '查看全分辨率原画',
     },
   };
 
-  const t = content[activeLanguage as keyof typeof content] || content.en;
+  const t = content[activeLanguage as SupportedLanguage] || content.en;
 
   const kittyImg = '/assets/aistudio/image_2f98b010.png';
   const siegeImg = '/assets/aistudio/image_d1a84294.png';
 
   return (
-    <section id="seasonal" className="py-20 lg:py-28 bg-[#070b16] relative overflow-hidden border-b border-blue-500/20">
-      
-      {/* Ambient glowing orbs tuned to the Chibi Logo colors (Sapphire Blue, Poring Pink, and Sun Gold) */}
+    <section id="seasonal" className="py-20 lg:py-28 bg-[#070b16]/50 backdrop-blur-[2px] relative overflow-hidden border-b border-blue-500/20">
       <div className="absolute top-1/3 -left-36 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 -right-36 w-96 h-96 bg-pink-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[32rem] h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-500/20 via-pink-500/20 to-amber-500/20 border border-blue-400/40 text-blue-300 text-xs font-black uppercase tracking-widest mb-4 shadow-lg shadow-blue-500/10">
             <Sparkles className="w-4 h-4 text-pink-400 animate-pulse" />
@@ -130,54 +152,42 @@ export const SeasonalSpotlight: React.FC<SeasonalSpotlightProps> = ({
           </p>
         </div>
 
-        {/* 2-Card Side-by-Side Showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-          
-          {/* Card 1: Campus Kitty - Pastel Sapphire & Poring Pink Theme */}
+          {/* Card 1 */}
           <div className="rounded-3xl border-2 border-sky-500/40 hover:border-pink-500/60 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-[#0c1328] shadow-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 group hover:shadow-sky-500/10">
             <div>
-              {/* Image Preview Container */}
               <div className="relative rounded-2xl overflow-hidden aspect-[16/9] mb-5 border border-sky-500/30 bg-black cursor-pointer group/img">
                 <img
                   src={kittyImg}
                   alt={t.kittyTitle}
                   className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700"
-                  onClick={() => onInspectImage(kittyImg, `${t.kittyTitle} - Official Ragnarok Chibi Artwork`)}
+                  onClick={() => onInspectImage(kittyImg, t.kittyTitle)}
                 />
-                
-                {/* Gradient vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
-
-                {/* Badge Top Left */}
                 <div className="absolute top-3.5 left-3.5 flex items-center gap-2">
                   <span className="px-3 py-1 rounded-full bg-slate-950/85 border border-pink-400/70 text-[11px] font-black text-pink-300 uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-md">
                     <Cat className="w-3.5 h-3.5 text-pink-400" />
                     <span>{t.kittyBadge}</span>
                   </span>
                 </div>
-
-                {/* Inspect Button Top Right */}
                 <button
                   type="button"
-                  onClick={() => onInspectImage(kittyImg, `${t.kittyTitle} - Official Ragnarok Chibi Artwork`)}
+                  onClick={() => onInspectImage(kittyImg, t.kittyTitle)}
                   className="absolute top-3.5 right-3.5 p-2 rounded-xl bg-slate-950/85 hover:bg-sky-500 hover:text-slate-950 text-sky-300 border border-sky-400/60 text-xs font-bold transition-all backdrop-blur-md shadow-md cursor-pointer flex items-center gap-1.5"
-                  title="Inspect Full Image"
                 >
                   <Eye className="w-4 h-4" />
-                  <span className="hidden sm:inline text-[11px]">Inspect Art</span>
+                  <span className="hidden sm:inline text-[11px]">{t.inspectShort}</span>
                 </button>
               </div>
 
-              {/* Title & Description */}
-              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-sky-300 transition-colors flex items-center gap-2">
-                <span>{t.kittyTitle}</span>
+              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-sky-300 transition-colors">
+                {t.kittyTitle}
               </h3>
 
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-5">
                 {t.kittyDesc}
               </p>
 
-              {/* Pills */}
               <div className="flex flex-wrap gap-2 mb-6">
                 <span className="px-3 py-1 rounded-xl bg-sky-500/15 border border-sky-500/30 text-sky-300 text-xs font-bold">
                   🐾 {t.kittyPill1}
@@ -191,14 +201,13 @@ export const SeasonalSpotlight: React.FC<SeasonalSpotlightProps> = ({
               </div>
             </div>
 
-            {/* Bottom Action */}
             <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
               <span className="text-xs font-mono text-sky-400 font-semibold">
                 RAGNARÖK • THE NEW WORLD
               </span>
               <button
                 type="button"
-                onClick={() => onInspectImage(kittyImg, `${t.kittyTitle} - Official Ragnarok Chibi Artwork`)}
+                onClick={() => onInspectImage(kittyImg, t.kittyTitle)}
                 className="px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-xs font-bold shadow-lg shadow-sky-500/20 transition-all cursor-pointer flex items-center gap-1.5"
               >
                 <Eye className="w-3.5 h-3.5" />
@@ -207,51 +216,41 @@ export const SeasonalSpotlight: React.FC<SeasonalSpotlightProps> = ({
             </div>
           </div>
 
-          {/* Card 2: Siege War - Fiery Gold & Celestial Sapphire Battle */}
+          {/* Card 2 */}
           <div className="rounded-3xl border-2 border-amber-500/40 hover:border-red-500/60 bg-gradient-to-b from-slate-900/90 via-slate-900/80 to-[#1b0e12] shadow-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 group hover:shadow-amber-500/10">
             <div>
-              {/* Image Preview Container */}
               <div className="relative rounded-2xl overflow-hidden aspect-[16/9] mb-5 border border-amber-500/30 bg-black cursor-pointer group/img">
                 <img
                   src={siegeImg}
                   alt={t.siegeTitle}
                   className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700"
-                  onClick={() => onInspectImage(siegeImg, `${t.siegeTitle} - Imperial Castle Siege (GvG)`)}
+                  onClick={() => onInspectImage(siegeImg, t.siegeTitle)}
                 />
-
-                {/* Gradient vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
-
-                {/* Badge Top Left */}
                 <div className="absolute top-3.5 left-3.5 flex items-center gap-2">
                   <span className="px-3 py-1 rounded-full bg-slate-950/85 border border-amber-400/70 text-[11px] font-black text-amber-300 uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-md">
                     <Flame className="w-3.5 h-3.5 text-amber-400" />
                     <span>{t.siegeBadge}</span>
                   </span>
                 </div>
-
-                {/* Inspect Button Top Right */}
                 <button
                   type="button"
-                  onClick={() => onInspectImage(siegeImg, `${t.siegeTitle} - Imperial Castle Siege (GvG)`)}
+                  onClick={() => onInspectImage(siegeImg, t.siegeTitle)}
                   className="absolute top-3.5 right-3.5 p-2 rounded-xl bg-slate-950/85 hover:bg-amber-500 hover:text-slate-950 text-amber-300 border border-amber-400/60 text-xs font-bold transition-all backdrop-blur-md shadow-md cursor-pointer flex items-center gap-1.5"
-                  title="Inspect Full Image"
                 >
                   <Eye className="w-4 h-4" />
-                  <span className="hidden sm:inline text-[11px]">Inspect Art</span>
+                  <span className="hidden sm:inline text-[11px]">{t.inspectShort}</span>
                 </button>
               </div>
 
-              {/* Title & Description */}
-              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors flex items-center gap-2">
-                <span>{t.siegeTitle}</span>
+              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">
+                {t.siegeTitle}
               </h3>
 
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-5">
                 {t.siegeDesc}
               </p>
 
-              {/* Pills */}
               <div className="flex flex-wrap gap-2 mb-6">
                 <span className="px-3 py-1 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-bold">
                   🏰 {t.siegePill1}
@@ -265,14 +264,13 @@ export const SeasonalSpotlight: React.FC<SeasonalSpotlightProps> = ({
               </div>
             </div>
 
-            {/* Bottom Action */}
             <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
               <span className="text-xs font-mono text-amber-400 font-semibold">
                 WAR OF EMPERIUM • MIDGARD
               </span>
               <button
                 type="button"
-                onClick={() => onInspectImage(siegeImg, `${t.siegeTitle} - Imperial Castle Siege (GvG)`)}
+                onClick={() => onInspectImage(siegeImg, t.siegeTitle)}
                 className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 text-xs font-bold shadow-lg shadow-amber-500/20 transition-all cursor-pointer flex items-center gap-1.5"
               >
                 <Eye className="w-3.5 h-3.5" />
@@ -280,9 +278,7 @@ export const SeasonalSpotlight: React.FC<SeasonalSpotlightProps> = ({
               </button>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

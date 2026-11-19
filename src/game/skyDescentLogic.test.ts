@@ -24,23 +24,23 @@ function makePlayer(x = 200, y = 120): SkyPlayer {
   };
 }
 
-test('TOTAL_DURATION is 120 seconds and formats cleanly', () => {
-  assert.equal(TOTAL_DURATION, 120);
-  assert.equal(formatSkyTime(120), '02:00');
-  assert.equal(formatSkyTime(61), '01:01');
+test('TOTAL_DURATION is 30 seconds and formats cleanly', () => {
+  assert.equal(TOTAL_DURATION, 30);
+  assert.equal(formatSkyTime(30), '00:30');
+  assert.equal(formatSkyTime(15), '00:15');
   assert.equal(formatSkyTime(5.2), '00:06');
   assert.equal(formatSkyTime(0), '00:00');
 });
 
 test('getSkyRank assigns expected adventurer ranks', () => {
-  assert.equal(getSkyRank(2500), 'S-Rank Sky Hero');
-  assert.equal(getSkyRank(1400), 'A-Rank Cloud Ace');
-  assert.equal(getSkyRank(300), 'B-Rank Midgard Diver');
+  assert.equal(getSkyRank(1000), 'S-Rank Sky Hero');
+  assert.equal(getSkyRank(500), 'A-Rank Cloud Ace');
+  assert.equal(getSkyRank(200), 'B-Rank Midgard Diver');
 });
 
 test('spawnSkyEntity rises upward from bottom of viewport for sky descent illusion', () => {
-  const ent = spawnSkyEntity(1, 380, 520, getDifficultyFactor(120), 0.1, 0.5, 0.5);
-  assert.ok(ent.y > 520, 'newly spawned sky entity starts below bottom edge');
+  const ent = spawnSkyEntity(1, 960, 560, getDifficultyFactor(30), 0.1, 0.5, 0.5);
+  assert.ok(ent.y > 560, 'newly spawned sky entity starts below bottom edge');
   assert.ok(ent.vy < 0, 'sky entity velocity moves upward relative to descending player');
 });
 

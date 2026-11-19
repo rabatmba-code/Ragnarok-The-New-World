@@ -48,7 +48,7 @@ test('filterMarketItems filters correctly by category and search text', () => {
 });
 
 test('all game classes have valid stats and role', () => {
-  assert.equal(GAME_CLASSES.length, 6);
+  assert.equal(GAME_CLASSES.length, 8);
   for (const c of GAME_CLASSES) {
     assert.ok(c.name.length > 0);
     assert.ok(c.keySkills.length >= 3);
@@ -56,3 +56,10 @@ test('all game classes have valid stats and role', () => {
     assert.ok(c.recommendedStats.vit >= 0);
   }
 });
+
+test('all Prontera Market stalls have distinct non-duplicate icons', () => {
+  const iconKeys = INITIAL_MARKET_STALLS.map((item) => item.iconKey);
+  const uniqueIconKeys = new Set(iconKeys);
+  assert.equal(uniqueIconKeys.size, INITIAL_MARKET_STALLS.length);
+});
+

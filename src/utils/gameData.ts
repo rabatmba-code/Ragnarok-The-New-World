@@ -17,12 +17,15 @@ export interface GameClass {
   accentColor: string;
 }
 
+export type MarketIconKey = 'sword' | 'cake' | 'ghost' | 'flame' | 'crown' | 'shield';
+
 export interface MarketItem {
   id: string;
   shopName: string;
   seller: string;
   itemName: string;
   category: 'Card' | 'Weapon' | 'Headgear' | 'Consumable' | 'Armor';
+  iconKey: MarketIconKey;
   price: number;
   rarity: 'Common' | 'Rare' | 'Epic' | 'Legendary' | 'MVP';
   verified: boolean;
@@ -96,6 +99,30 @@ export const GAME_CLASSES: GameClass[] = [
     quote: 'True power is forged in fire and traded for millions of Zeny.',
     accentColor: '#f97316',
   },
+  {
+    id: 'druid',
+    name: 'Druid',
+    title: 'Shapeshifting Warden of Midgard Wilds',
+    role: 'Crowd Control',
+    playstyle:
+      'Signature multi-form launch class! Morph seamlessly between ferocious Beast, soaring Eagle, and primal Nature forms for hybrid melee, burst magic, and group utility.',
+    keySkills: ['Primal Shapeshift', 'Wild Bear Claw', 'Tempest Feather', 'World Tree Blessing'],
+    recommendedStats: { str: 65, agi: 70, vit: 65, int: 85, dex: 65, luk: 35 },
+    quote: 'One spirit, many forms — the wilds of Midgard answer every call.',
+    accentColor: '#14b8a6',
+  },
+  {
+    id: 'paladin',
+    name: 'Paladin',
+    title: 'Sacred Crusader of the Royal Guard',
+    role: 'Tank',
+    playstyle:
+      'Holy shield vanguard capable of absorbing lethal MVP boss mechanics, casting Devotion to protect allies, and unleashing radiant Grand Cross AoE damage.',
+    keySkills: ['Devotion', 'Grand Cross', 'Shield Boomerang', 'Reflect Shield'],
+    recommendedStats: { str: 70, agi: 35, vit: 95, int: 55, dex: 55, luk: 20 },
+    quote: 'Stand behind my aegis and no boss in Midgard shall break our line.',
+    accentColor: '#0ea5e9',
+  },
 ];
 
 export const INITIAL_MARKET_STALLS: MarketItem[] = [
@@ -105,6 +132,7 @@ export const INITIAL_MARKET_STALLS: MarketItem[] = [
     seller: 'KafraVIP_Leon',
     itemName: '+11 Excalibur Holy Blade',
     category: 'Weapon',
+    iconKey: 'sword',
     price: 18500000,
     rarity: 'Legendary',
     verified: true,
@@ -116,6 +144,7 @@ export const INITIAL_MARKET_STALLS: MarketItem[] = [
     seller: 'Pudding_Lover',
     itemName: 'Fluffy Strawberry Poring Pancake x99',
     category: 'Consumable',
+    iconKey: 'cake',
     price: 35000,
     rarity: 'Common',
     verified: true,
@@ -127,6 +156,7 @@ export const INITIAL_MARKET_STALLS: MarketItem[] = [
     seller: 'DesperateHusband',
     itemName: 'Ghostring MVP Card',
     category: 'Card',
+    iconKey: 'ghost',
     price: 9999999,
     rarity: 'MVP',
     verified: true,
@@ -138,6 +168,7 @@ export const INITIAL_MARKET_STALLS: MarketItem[] = [
     seller: 'SpeedyGonzales',
     itemName: '+9 Muramasa Cursed Katana',
     category: 'Weapon',
+    iconKey: 'flame',
     price: 3200000,
     rarity: 'Epic',
     verified: true,
@@ -149,6 +180,7 @@ export const INITIAL_MARKET_STALLS: MarketItem[] = [
     seller: 'ChibiQueen_Rose',
     itemName: 'Animated Giant Fluffy Poring Hat',
     category: 'Headgear',
+    iconKey: 'crown',
     price: 4500000,
     rarity: 'Legendary',
     verified: true,
@@ -160,6 +192,7 @@ export const INITIAL_MARKET_STALLS: MarketItem[] = [
     seller: 'Lucky_GachaGuy',
     itemName: 'Baphomet Horns + Golden Thief Bug Card',
     category: 'Card',
+    iconKey: 'shield',
     price: 14200000,
     rarity: 'MVP',
     verified: true,
@@ -178,13 +211,24 @@ export function formatZeny(amount: number): string {
 }
 
 export function calculateClassMatch(answers: {
-  preferredCombat: 'frontline' | 'magic' | 'ranged' | 'stealth' | 'healing' | 'wealth';
+  preferredCombat:
+    | 'frontline'
+    | 'magic'
+    | 'ranged'
+    | 'stealth'
+    | 'healing'
+    | 'wealth'
+    | 'shapeshift';
   teamRole: 'lead' | 'support' | 'solo';
   dailyGoal: 'dungeon' | 'pvp' | 'trading' | 'social';
 }): GameClass {
   switch (answers.preferredCombat) {
+    case 'shapeshift':
+      return GAME_CLASSES.find((c) => c.id === 'druid')!;
     case 'frontline':
-      return GAME_CLASSES.find((c) => c.id === 'knight')!;
+      return answers.teamRole === 'support'
+        ? GAME_CLASSES.find((c) => c.id === 'paladin')!
+        : GAME_CLASSES.find((c) => c.id === 'knight')!;
     case 'magic':
       return GAME_CLASSES.find((c) => c.id === 'wizard')!;
     case 'ranged':

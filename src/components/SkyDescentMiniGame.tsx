@@ -10,6 +10,111 @@ import {
   type SkyEntity,
   type SkyPlayer,
 } from '../game/skyDescentLogic';
+import { SupportedLanguage } from '../utils/trackingAndLocale';
+
+interface SkyDescentMiniGameProps {
+  activeLanguage?: SupportedLanguage;
+}
+
+const SKY_COPY: Record<
+  SupportedLanguage,
+  {
+    arenaTitle: string;
+    scoreLabel: string;
+    timeLabel: string;
+    sprintBadge: string;
+    gameTitle: string;
+    descPrefix: string;
+    descOr: string;
+    descSuffix: string;
+    startBtn: string;
+    controlsHint: string;
+    endBadge: string;
+    endTitle: string;
+    endDesc: string;
+    finalScoreLabel: string;
+    ctaBtn: string;
+    comboLabel: string;
+    ranks: { s: string; a: string; b: string };
+  }
+> = {
+  en: {
+    arenaTitle: 'MIDGARD SKY DESCENT • 30s ARENA',
+    scoreLabel: 'SCORE',
+    timeLabel: 'TIME',
+    sprintBadge: '30-SECOND SKY SPRINT',
+    gameTitle: 'Midgard Sky Dive',
+    descPrefix: 'Control your character descending from the clouds! Use',
+    descOr: 'or',
+    descSuffix: 'to dodge obstacles and catch floating treasures!',
+    startBtn: 'START DESCENT (00:30) ⚡',
+    controlsHint: 'Controls: Keyboard Arrow Keys / A & D',
+    endBadge: 'LANDING COMPLETE!',
+    endTitle: 'Welcome to Midgard!',
+    endDesc: 'You completed the 30-second descent and unlocked your adventurer rank!',
+    finalScoreLabel: 'FINAL SCORE',
+    ctaBtn: 'DOWNLOAD & PLAY NOW 🚀',
+    comboLabel: 'COMBO',
+    ranks: { s: 'S-Rank Sky Hero', a: 'A-Rank Cloud Ace', b: 'B-Rank Midgard Diver' },
+  },
+  id: {
+    arenaTitle: 'TERJUN LANGIT MIDGARD • ARENA 30 DETIK',
+    scoreLabel: 'SKOR',
+    timeLabel: 'WAKTU',
+    sprintBadge: 'SPRINT LANGIT 30 DETIK',
+    gameTitle: 'Midgard Sky Dive',
+    descPrefix: 'Kendalikan karaktermu saat terjun dari awan! Gunakan',
+    descOr: 'atau',
+    descSuffix: 'untuk menghindari rintangan dan menangkap harta melayang!',
+    startBtn: 'MULAI TERJUN (00:30) ⚡',
+    controlsHint: 'Kontrol: Tombol Panah Keyboard / A & D',
+    endBadge: 'PENDARATAN SELESAI!',
+    endTitle: 'Selamat Datang di Midgard!',
+    endDesc: 'Kamu menyelesaikan terjun 30 detik dan membuka peringkat petualangmu!',
+    finalScoreLabel: 'SKOR AKHIR',
+    ctaBtn: 'UNDUH & MAIN SEKARANG 🚀',
+    comboLabel: 'KOMBO',
+    ranks: { s: 'Peringkat S • Pahlawan Langit', a: 'Peringkat A • Jagoan Awan', b: 'Peringkat B • Penerjun Midgard' },
+  },
+  th: {
+    arenaTitle: 'ดิ่งเวหา MIDGARD • อารีน่า 30 วินาที',
+    scoreLabel: 'คะแนน',
+    timeLabel: 'เวลา',
+    sprintBadge: 'ภารกิจดิ่งเวหา 30 วินาที',
+    gameTitle: 'Midgard Sky Dive',
+    descPrefix: 'ควบคุมตัวละครดิ่งลงมาจากหมู่เมฆ! ใช้ปุ่ม',
+    descOr: 'หรือ',
+    descSuffix: 'เพื่อหลบสิ่งกีดขวางและเก็บสมบัติลอยฟ้า!',
+    startBtn: 'เริ่มดิ่งเวหา (00:30) ⚡',
+    controlsHint: 'การควบคุม: ปุ่มลูกศรบนคีย์บอร์ด / A และ D',
+    endBadge: 'ลงจอดสำเร็จ!',
+    endTitle: 'ยินดีต้อนรับสู่ Midgard!',
+    endDesc: 'คุณผ่านภารกิจดิ่งเวหา 30 วินาทีและปลดล็อกแรงก์นักผจญภัยแล้ว!',
+    finalScoreLabel: 'คะแนนรวม',
+    ctaBtn: 'ดาวน์โหลดและเล่นเลย 🚀',
+    comboLabel: 'คอมโบ',
+    ranks: { s: 'แรงก์ S • ฮีโร่แห่งเวหา', a: 'แรงก์ A • จ้าวแห่งเมฆา', b: 'แรงก์ B • นักผจญภัย Midgard' },
+  },
+  zh: {
+    arenaTitle: '米德加尔特高空降落 • 30秒竞技场',
+    scoreLabel: '得分',
+    timeLabel: '时间',
+    sprintBadge: '30 秒高空极速挑战',
+    gameTitle: '米德加尔特空降大冒险',
+    descPrefix: '操控角色从云端降落！使用键盘',
+    descOr: '或',
+    descSuffix: '躲避障碍并收集空中宝藏！',
+    startBtn: '开始降落 (00:30) ⚡',
+    controlsHint: '操作方式：键盘方向键 / A 与 D 键',
+    endBadge: '成功着陆！',
+    endTitle: '欢迎来到米德加尔特！',
+    endDesc: '你已完成 30 秒高空降落挑战并解锁专属冒险家评级！',
+    finalScoreLabel: '最终得分',
+    ctaBtn: '立即下载并游玩 🚀',
+    comboLabel: '连击',
+    ranks: { s: 'S 级 • 天空英雄', a: 'A 级 • 云端王牌', b: 'B 级 • 米德加尔特冒险者' },
+  },
+};
 
 interface CloudLayerItem {
   x: number;
@@ -61,7 +166,16 @@ interface FloatingPopup {
 const MAX_PARTICLES = 64;
 const MAX_POPUPS = 12;
 
-export const SkyDescentMiniGame: React.FC = () => {
+export const SkyDescentMiniGame: React.FC<SkyDescentMiniGameProps> = ({
+  activeLanguage = 'en',
+}) => {
+  const t = SKY_COPY[activeLanguage] || SKY_COPY.en;
+  const localizedRank = (pts: number) => {
+    const base = getSkyRank(pts);
+    if (base.startsWith('S-Rank')) return t.ranks.s;
+    if (base.startsWith('A-Rank')) return t.ranks.a;
+    return t.ranks.b;
+  };
   const stageRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -207,26 +321,27 @@ export const SkyDescentMiniGame: React.FC = () => {
 
   const initAtmosphere = useCallback(() => {
     const { width, height } = sizeRef.current;
-    starsRef.current = Array.from({ length: 34 }, () => ({
+    const density = Math.max(1, Math.min(2.6, width / 420));
+    starsRef.current = Array.from({ length: Math.round(34 * density) }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       r: Math.random() * 1.8 + 0.6,
       speed: Math.random() * 45 + 25,
       alpha: 0.35 + Math.random() * 0.55,
     }));
-    cloudsRef.current = Array.from({ length: 7 }, () => ({
+    cloudsRef.current = Array.from({ length: Math.round(7 * density) }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      w: 84 + Math.random() * 90,
-      h: 26 + Math.random() * 16,
+      w: 110 + Math.random() * 120,
+      h: 30 + Math.random() * 20,
       speed: 55 + Math.random() * 75,
       alpha: 0.08 + Math.random() * 0.1,
     }));
-    streaksRef.current = Array.from({ length: 14 }, () => ({
+    streaksRef.current = Array.from({ length: Math.round(14 * density) }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      len: 28 + Math.random() * 46,
-      speed: 240 + Math.random() * 180,
+      len: 30 + Math.random() * 52,
+      speed: 250 + Math.random() * 190,
       alpha: 0.14 + Math.random() * 0.18,
     }));
   }, []);
@@ -239,14 +354,15 @@ export const SkyDescentMiniGame: React.FC = () => {
     if (!ctx) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const width = stage.clientWidth || 380;
-    const height = stage.clientHeight || 520;
+    const width = stage.clientWidth || 960;
+    const height = stage.clientHeight || 560;
     sizeRef.current = { width, height, dpr };
 
     canvas.width = Math.floor(width * dpr);
     canvas.height = Math.floor(height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    playerRef.current.y = Math.min(126, Math.max(96, Math.round(height * 0.23)));
+    playerRef.current.speed = Math.max(460, Math.min(780, Math.round(width * 0.68)));
+    playerRef.current.y = Math.min(138, Math.max(98, Math.round(height * 0.22)));
     playerRef.current.x = Math.max(32, Math.min(width - 32, playerRef.current.x));
   }, []);
 
@@ -454,12 +570,13 @@ export const SkyDescentMiniGame: React.FC = () => {
       lastFrameTimeRef.current = now;
 
       const difficulty = getDifficultyFactor(timeLeftRef.current, TOTAL_DURATION);
-      const spawnInterval = 0.56 - difficulty * 0.22; // 0.56s down to 0.34s
+      const { width, height } = sizeRef.current;
+      const widthScale = Math.max(1, Math.min(2.2, width / 440));
+      const spawnInterval = (0.48 - difficulty * 0.18) / widthScale;
 
       spawnTimerRef.current += dt;
       if (spawnTimerRef.current >= spawnInterval) {
         spawnTimerRef.current = 0;
-        const { width, height } = sizeRef.current;
         entitiesRef.current.push(
           spawnSkyEntity(nextEntityIdRef.current++, width, height, difficulty)
         );
@@ -621,54 +738,54 @@ export const SkyDescentMiniGame: React.FC = () => {
   return (
     <section
       id="sky-descent"
-      className="py-16 lg:py-24 bg-[#030712] relative overflow-hidden border-b border-sky-400/25"
+      className="py-16 lg:py-24 bg-[#030712]/50 backdrop-blur-[2px] relative overflow-hidden border-b border-sky-400/25"
     >
       {/* Celestial Sky Ambient Glows */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto px-4 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
         {/* =========================================================
-          RAGNARÖK: DESCENT FROM THE SKY — PC HARDCORE EDITION
+          RAGNARÖK: DESCENT FROM THE SKY — WIDESCREEN 30s PC EDITION
         ========================================================= */}
         <div className="flex justify-center items-center w-full py-2">
           <div
             data-testid="sky-descent-frame"
             data-game-state={gameState}
-            className="w-full max-w-[420px] h-[680px] max-h-[88dvh] min-h-[520px] flex flex-col overflow-hidden relative select-none rounded-[24px] border-2 border-sky-400/70"
+            className="w-full max-w-6xl h-[76vh] min-h-[560px] max-h-[780px] flex flex-col overflow-hidden relative select-none rounded-[24px] border-2 border-sky-400/70"
             style={{
               background: 'linear-gradient(180deg, #0c1828 0%, #030712 100%)',
               boxShadow: '0 25px 50px rgba(0,0,0,0.9), 0 0 35px rgba(56, 189, 248, 0.25)',
             }}
           >
-            {/* Top RPG HUD Bar */}
-            <header className="p-3 bg-[#080e1a]/95 border-b border-sky-400/30 flex flex-col gap-2 z-[3]">
-              <div className="flex items-center gap-1.5">
+            {/* Top RPG HUD Bar (Widescreen Horizontal Layout) */}
+            <header className="px-4 sm:px-6 py-3 bg-[#080e1a]/95 border-b border-sky-400/30 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 z-[3]">
+              <div className="flex items-center gap-2">
                 <span
-                  className="w-2 h-2 rounded-full bg-sky-400"
+                  className="w-2.5 h-2.5 rounded-full bg-sky-400"
                   style={{ boxShadow: '0 0 10px #38bdf8' }}
                 />
-                <span className="text-[11px] font-black tracking-[0.15em] text-sky-200">
-                  MIDGARD SKY DESCENT
+                <span className="text-xs sm:text-sm font-black tracking-[0.12em] text-sky-200">
+                  {t.arenaTitle}
                 </span>
               </div>
 
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex-1 flex items-center justify-between px-2.5 py-1.5 rounded-[10px] bg-slate-900/95 border border-sky-400/30">
-                  <span className="text-[10px] font-extrabold text-slate-400">SCORE</span>
+              <div className="flex items-center gap-2.5 sm:min-w-[360px]">
+                <div className="flex-1 flex items-center justify-between px-3.5 py-1.5 rounded-[10px] bg-slate-900/95 border border-sky-400/30">
+                  <span className="text-[10px] font-extrabold text-slate-400">{t.scoreLabel}</span>
                   <strong
                     data-testid="sky-score"
-                    className="text-[15px] font-black text-white tabular-nums"
+                    className="text-base font-black text-white tabular-nums"
                   >
                     {score.toLocaleString()}
                   </strong>
                 </div>
 
-                <div className="flex-1 flex items-center justify-between px-2.5 py-1.5 rounded-[10px] bg-slate-900/95 border border-sky-400/30">
-                  <span className="text-[10px] font-extrabold text-slate-400">TIME</span>
+                <div className="flex-1 flex items-center justify-between px-3.5 py-1.5 rounded-[10px] bg-slate-900/95 border border-sky-400/30">
+                  <span className="text-[10px] font-extrabold text-slate-400">{t.timeLabel}</span>
                   <strong
                     data-testid="sky-timer"
-                    className="text-[15px] font-black text-amber-400 tabular-nums"
+                    className="text-base font-black text-amber-400 tabular-nums"
                   >
                     {formatSkyTime(displaySeconds)}
                   </strong>
@@ -683,7 +800,7 @@ export const SkyDescentMiniGame: React.FC = () => {
                   }}
                   title="Toggle Sound"
                   aria-label={isMuted ? 'Unmute Sound' : 'Mute Sound'}
-                  className="w-[34px] h-[34px] rounded-[10px] border border-sky-400/40 bg-slate-900/95 text-white text-[15px] leading-none cursor-pointer flex items-center justify-center hover:border-sky-300 transition-colors"
+                  className="w-[38px] h-[38px] rounded-[10px] border border-sky-400/40 bg-slate-900/95 text-white text-[16px] leading-none cursor-pointer flex items-center justify-center hover:border-sky-300 transition-colors shrink-0"
                 >
                   {isMuted ? '🔇' : '🔊'}
                 </button>
@@ -707,44 +824,43 @@ export const SkyDescentMiniGame: React.FC = () => {
 
               {/* Start Screen Overlay */}
               {gameState === 'start' && (
-                <div className="absolute inset-0 p-5 flex items-center justify-center bg-[#030712]/90 z-[5]">
+                <div className="absolute inset-0 p-5 flex items-center justify-center bg-[#030712]/88 z-[5]">
                   <div
-                    className="w-full rounded-[20px] p-[22px] text-center border-[1.5px] border-sky-400/60 shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+                    className="w-full max-w-lg rounded-[22px] p-6 sm:p-8 text-center border-[1.5px] border-sky-400/60 shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
                     style={{ background: 'linear-gradient(180deg, #0f172a 0%, #020617 100%)' }}
                   >
                     <div
-                      className="text-[42px] mb-2"
+                      className="text-[48px] mb-2"
                       style={{ filter: 'drop-shadow(0 0 15px rgba(56, 189, 248, 0.7))' }}
                     >
                       ✨🪂
                     </div>
-                    <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-black text-sky-200 bg-sky-400/20 border border-sky-400/40 mb-2">
-                      DESCEND FROM THE SKY
+                    <span className="inline-block px-3 py-1 rounded-full text-[11px] font-black text-sky-200 bg-sky-400/20 border border-sky-400/40 mb-2.5">
+                      {t.sprintBadge}
                     </span>
-                    <h2 className="m-0 mb-2 text-[22px] font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-400">
-                      Midgard Sky Dive
+                    <h2 className="m-0 mb-2.5 text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-400">
+                      {t.gameTitle}
                     </h2>
-                    <p className="m-0 mb-4 text-[13px] text-slate-300 leading-snug">
-                      Control your character descending from the clouds! Use{' '}
-                      <strong className="text-white">[ A / D ]</strong> or{' '}
-                      <strong className="text-white">[ ← / → ]</strong> to dodge obstacles and catch
-                      floating treasures!
+                    <p className="m-0 mb-5 text-sm text-slate-300 leading-relaxed">
+                      {t.descPrefix}{' '}
+                      <strong className="text-white">[ A / D ]</strong> {t.descOr}{' '}
+                      <strong className="text-white">[ ← / → ]</strong> {t.descSuffix}
                     </p>
 
                     <button
                       type="button"
                       data-start="true"
                       onClick={startGame}
-                      className="flex items-center justify-center w-full p-[13px] border-none rounded-[12px] text-[14px] font-black text-white cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                      className="flex items-center justify-center w-full py-3.5 px-6 border-none rounded-[12px] text-[15px] font-black text-white cursor-pointer transition-transform hover:scale-[1.02] active:scale-[0.98]"
                       style={{
                         background: 'linear-gradient(90deg, #0284c7, #2563eb)',
                         boxShadow: '0 8px 20px rgba(2, 132, 199, 0.4)',
                       }}
                     >
-                      START DESCENT (02:00) ⚡
+                      {t.startBtn}
                     </button>
-                    <p className="mt-2.5 text-[11px] text-slate-400 mb-0">
-                      Controls: Keyboard Arrow Keys / A &amp; D
+                    <p className="mt-3 text-xs text-slate-400 mb-0">
+                      {t.controlsHint}
                     </p>
                   </div>
                 </div>
@@ -754,46 +870,46 @@ export const SkyDescentMiniGame: React.FC = () => {
               {gameState === 'ended' && (
                 <div className="absolute inset-0 p-5 flex items-center justify-center bg-[#030712]/94 z-[5]">
                   <div
-                    className="w-full rounded-[20px] p-[22px] text-center border-[1.5px] border-sky-400/60 shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+                    className="w-full max-w-lg rounded-[22px] p-6 sm:p-8 text-center border-[1.5px] border-sky-400/60 shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
                     style={{ background: 'linear-gradient(180deg, #0f172a 0%, #020617 100%)' }}
                   >
                     <div
-                      className="text-[42px] mb-2"
+                      className="text-[48px] mb-2"
                       style={{ filter: 'drop-shadow(0 0 15px rgba(56, 189, 248, 0.7))' }}
                     >
                       🏆
                     </div>
-                    <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-black text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2">
-                      LANDING COMPLETE!
+                    <span className="inline-block px-3 py-1 rounded-full text-[11px] font-black text-amber-300 bg-amber-400/20 border border-amber-400/40 mb-2.5">
+                      {t.endBadge}
                     </span>
-                    <h2 className="m-0 mb-2 text-[22px] font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-400">
-                      Welcome to Midgard!
+                    <h2 className="m-0 mb-2 text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-400 to-pink-400">
+                      {t.endTitle}
                     </h2>
-                    <p className="m-0 mb-4 text-[13px] text-slate-300 leading-snug">
-                      You successfully landed and claimed your adventurer rank!
+                    <p className="m-0 mb-5 text-sm text-slate-300 leading-relaxed">
+                      {t.endDesc}
                     </p>
 
-                    <div className="bg-[#020617]/80 border border-sky-400/40 rounded-[14px] p-3 mb-4">
-                      <span className="text-[10px] font-extrabold text-slate-400 tracking-wider">
-                        FINAL SCORE
+                    <div className="bg-[#020617]/80 border border-sky-400/40 rounded-[14px] p-4 mb-5">
+                      <span className="text-[11px] font-extrabold text-slate-400 tracking-wider">
+                        {t.finalScoreLabel}
                       </span>
-                      <div className="text-[36px] font-black text-amber-400 my-1 leading-none tabular-nums">
+                      <div className="text-[42px] font-black text-amber-400 my-1 leading-none tabular-nums">
                         {score.toLocaleString()}
                       </div>
-                      <div className="text-[13px] font-extrabold text-sky-400">
-                        {getSkyRank(score)}
+                      <div className="text-sm font-extrabold text-sky-400">
+                        {localizedRank(score)}
                       </div>
                     </div>
 
                     <a
                       href="#go2offer#"
-                      className="flex items-center justify-center w-full p-[13px] rounded-[12px] text-[14px] font-black text-slate-900 no-underline transition-transform hover:scale-[1.02]"
+                      className="flex items-center justify-center w-full py-3.5 px-6 rounded-[12px] text-[15px] font-black text-slate-900 no-underline transition-transform hover:scale-[1.02]"
                       style={{
                         background: 'linear-gradient(90deg, #fbbf24, #fde047)',
                         boxShadow: '0 8px 25px rgba(251, 191, 36, 0.5)',
                       }}
                     >
-                      DOWNLOAD &amp; PLAY NOW 🚀
+                      {t.ctaBtn}
                     </a>
                   </div>
                 </div>
@@ -801,10 +917,10 @@ export const SkyDescentMiniGame: React.FC = () => {
             </div>
 
             {/* Footer */}
-            <footer className="px-3.5 py-2 bg-[#020617]/95 border-t border-sky-400/30 flex justify-between text-[10px] font-extrabold text-slate-400">
+            <footer className="px-5 py-2.5 bg-[#020617]/95 border-t border-sky-400/30 flex justify-between text-[11px] font-extrabold text-slate-400">
               <span>RAGNARÖK: THE NEW WORLD</span>
               <span data-testid="sky-combo" className="text-sky-400 tabular-nums">
-                COMBO x{combo}
+                {t.comboLabel} x{combo}
               </span>
             </footer>
           </div>
